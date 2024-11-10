@@ -6,10 +6,10 @@ import java.util.Date;
 public class Reserva {
 
     // Variables de instancia
-    String codUnico;
-    // private Usuario user; // Falta clase Usuario
+    private String codUnico;
+    private Usuario user; 
     private Date fechaReserva; // Se recomienda el uso de LocalDate de java.time, ya que Date es obsoleto
-    // private Espacio espacio; // Falta clase Espacio
+    private Espacio espacio; 
     private EstadoReserva estadoReserva;
     private String motivoReserva;
     public static int contador;
@@ -22,9 +22,9 @@ public class Reserva {
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
         
-        // this.user.codUnico = codUnicoUser; // Falta clase Usuario
-        // this.espacio.codUnico = codUnicoEspacio; // Falta clase Espacio
-        // this.espacio.tipoEspacio = TipoEspacio.valueOf(tipoEspacioReservado.toUpperCase()); // Falta clase Espacio
+        this.user.setCodUnico(codUnicoUser);
+        this.espacio.setCodUnico(codUnicoEspacio);
+        this.espacio.setTipoEspacio(TipoEspacio.valueOf(tipoEspacioReservado.toUpperCase()));
     }
 
 
@@ -37,15 +37,13 @@ public class Reserva {
         return codUnico;
     }
 
-    // public Usuario getUser() {
-    //     return user;
-    // }
+    public Usuario getUser() {
+        return user;
+    }
 
-    // Faltan clases Usuario y Espacio
-
-    // public Espacio getEspacio() {
-    //     return espacio;
-    // }
+    public Espacio getEspacio() {
+        return espacio;
+    }
 
     public Date getFechaReserva(){
         return fechaReserva;
@@ -69,15 +67,13 @@ public class Reserva {
         this.codUnico = codUnico;
     }
 
-    // public void setUser(Usuario user) {
-    //     this.user = user;
-    // }
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
 
-    // Faltan clases Usuario y Espacio
-
-    // public void setEspacio(Espacio espacio) {
-    //     this.espacio = espacio;
-    // }
+    public void setEspacio(Espacio espacio) {
+        this.espacio = espacio;
+    }
 
     public void setFechaReserva(Date fechaReserva) {
         this.fechaReserva = fechaReserva;
