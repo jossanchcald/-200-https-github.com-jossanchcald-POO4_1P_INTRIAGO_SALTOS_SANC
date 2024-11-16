@@ -1,7 +1,9 @@
 package com.proyectopoo1;
 
+import java.util.Date;
+
 public abstract class Usuario {
-    //atributos protected de instancia porque serán heredados a los distintos tipos de usuarios
+    // Variables de instancia protected porque serán heredados a los distintos tipos de usuarios
     protected String codUnico;
     protected String numCedula;
     protected String nombres;
@@ -22,6 +24,19 @@ public abstract class Usuario {
     }
 
     //metodos adicionales
+    public void gestionarReserva(){}
+
+    public void consultarReserva(Date fecha){}
+
+    public void enviarCorreo(){}
+
+    public void enviarCorreo(String materia){}
+
+    public String toString(){return "Codigo: " + codUnico + " - Num. Cedula: " + 
+                            numCedula + "\nNombres: " + nombres + " - Apellidos: " + 
+                            apellidos + "\nUsuario: " + user + " - Contraseña: " + 
+                            password + "\nCorreo: " + correo;}
+
 
     //getters
     public String getCodUnico(){

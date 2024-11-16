@@ -25,11 +25,22 @@ public class Reserva {
         this.user.setCodUnico(codUnicoUser);
         this.espacio.setCodUnico(codUnicoEspacio);
         this.espacio.setTipoEspacio(TipoEspacio.valueOf(tipoEspacioReservado.toUpperCase()));
+        contador++;
     }
 
 
     // Métodos adicionales
+    public void cargarReserva(){
 
+    }
+
+    private String generarCodUnico(){
+        return "";
+    }
+
+    public String toString(){
+        return "Codigo: " + codUnico + " - Usuario: " + user + "\nFecha reserva: " + fechaReserva + " - Espacio: " + espacio + "\nEstado reserva: " + estadoReserva + "\nMotivo reserva: " + motivoReserva;
+    }
 
 
     // Getters
