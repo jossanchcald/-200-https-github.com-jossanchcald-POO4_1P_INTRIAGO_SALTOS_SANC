@@ -32,10 +32,10 @@ public abstract class Usuario {
 
     public void enviarCorreo(String materia){}
 
-    public String toString(){return "Codigo: " + codUnico + " - Num. Cedula: " + 
-                            numCedula + "\nNombres: " + nombres + " - Apellidos: " + 
-                            apellidos + "\nUsuario: " + user + " - Contraseña: " + 
-                            password + "\nCorreo: " + correo;}
+    public String toString(){return codUnico + " | " + 
+                            numCedula + " | " + nombres + " | " + 
+                            apellidos + " | " + user + " | " + 
+                            password + " | " + correo + " | " ;}
 
 
     //getters

@@ -39,7 +39,7 @@ public class Reserva {
     }
 
     public String toString(){
-        return "Codigo: " + codUnico + " - Usuario: " + user + "\nFecha reserva: " + fechaReserva + " - Espacio: " + espacio + "\nEstado reserva: " + estadoReserva + "\nMotivo reserva: " + motivoReserva;
+        return codUnico + " | " + user.codUnico + " | " + user.getNumCedula() + " | " + fechaReserva + " | " + espacio.getCodUnico() + " | " + espacio.getTipoEspacio() + " | " + estadoReserva + " | " + motivoReserva;
     }
 
 
