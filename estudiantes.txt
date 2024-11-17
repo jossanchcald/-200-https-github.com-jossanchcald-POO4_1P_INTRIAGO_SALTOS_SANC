@@ -1,0 +1,5 @@
+001 | 0923456789 | Juan | Pérez | 20241001 | Ingeniería en Sistemas
+004 | 0934567890 | Ana | Morales | 20241002 | Ingeniería Civil
+007 | 0957891234 | Javier | Castillo | 20241003 | Administración de Empresas
+010 | 0931234567 | Sofía | López | 20241004 | Arquitectura
+013 | 0954321789 | David | Castillo | 20241005 | Ingeniería Industrial

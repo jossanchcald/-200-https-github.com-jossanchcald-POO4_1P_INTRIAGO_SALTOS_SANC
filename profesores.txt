@@ -1,0 +1,5 @@
+002 | 0912345678 | María | Rodríguez | Facultad de Ingeniería en Computación | Programación Avanzada, Estructuras de Datos
+008 | 0946789123 | Diana | Vargas | Facultad de Ciencias Económicas | Microeconomía, Macroeconomía
+011 | 0927894561 | Jorge | Herrera | Facultad de Ingeniería Eléctrica y Electrónica | Circuitos Eléctricos, Electrónica Digital
+014 | 0943219876 | Laura | Peña | Facultad de Ciencias Naturales | Química Orgánica, Biología Celular
+005 | 0945678912 | Pedro | Sánchez | Facultad de Ingeniería Mecánica | Mecánica de Fluidos, Termodinámica
