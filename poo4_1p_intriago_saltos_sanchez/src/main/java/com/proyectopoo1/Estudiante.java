@@ -8,7 +8,7 @@ public class Estudiante extends Usuario{
 
 
     // Constructores
-    public Estudiante(String numMatricula, String carrera, Cargo cargo, String codUnico, String numCedula, String nombres, String apellidos, String user, String password, String correo){
+    public Estudiante(String numMatricula, String carrera, String codUnico, String numCedula, String nombres, String apellidos, String user, String password, String correo){
         super(codUnico, numCedula, nombres, apellidos, user, password, correo);
         this.numMatricula = numMatricula;
         this.carrera = carrera;
@@ -33,6 +33,7 @@ public class Estudiante extends Usuario{
     public void setCarrera(String carrera) {
         this.carrera = carrera;
     }
+
 
 
 }

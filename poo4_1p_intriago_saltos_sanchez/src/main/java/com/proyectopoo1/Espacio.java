@@ -20,6 +20,9 @@ public class Espacio {
 
     }
 
+    public String toString(){
+        return this.permiso + this.nombreEsp;
+    }
 
     // getters 
     public String getCodUnico(){
