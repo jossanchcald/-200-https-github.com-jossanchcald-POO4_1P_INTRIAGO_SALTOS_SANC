@@ -26,7 +26,6 @@ public class ManejoArchivo {
  
             String linea;
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
                 lineas.add(linea);
 
             }
