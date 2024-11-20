@@ -3,6 +3,7 @@ import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Sistema {
@@ -10,7 +11,16 @@ public class Sistema {
     public static ArrayList<Espacio> espacios = new ArrayList<>();
     public static ArrayList<Reserva> reservas = new ArrayList<>(); 
 
-    
+
+    public static boolean validarCuenta(String user, String contrasenia){
+        for (Usuario usuario : usuarios) {
+            if(usuario.user.equals(user) & usuario.password.equals(contrasenia)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static void main(String[] args) {
         
@@ -41,7 +51,7 @@ public class Sistema {
                 for(String line: ManejoArchivo.leerArchivo("administradores.txt")){
                     String[] info = line.split(" \\| ");
                     if(datos[2].equals(info[2]) && datos[3].equals(info[3])){
-                        Sistema.usuarios.add(new Administrador(info[4],datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]));
+                        Sistema.usuarios.add(new Administrador(Cargo.valueOf(info[4]),datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]));
                     }
                 }
             }
@@ -53,14 +63,39 @@ public class Sistema {
             espacios.add(new Espacio(datos[0], TipoEspacio.valueOf(datos[1]), datos[2], Integer.parseInt(datos[3]), DisponibilidadEsp.valueOf(datos[4]), UsuarioPermitido.valueOf(datos[5])));
 
             }
-           
 
+
+
+
+
+
+
+        Scanner sc = new Scanner(System.in);
+
+
+
+        // Inicio de Sesión
+        System.out.print("Ingrese su usuario: ");
+        String userIn = sc.nextLine(); 
+        System.out.print("Ingrese su contraseña: ");
+        String passwordIn = sc.nextLine();
+
+        while (Sistema.validarCuenta(userIn, passwordIn) == false) {
+            System.out.println("\nLas credenciales ingresadas no pertenecen a ningun usuario");
+            System.out.print("Ingrese su usuario: ");
+            userIn = sc.nextLine(); 
+            System.out.print("Ingrese su contraseña: ");
+            passwordIn = sc.nextLine();
+        }
+
+           
+        
 
 
 
      
        
-        
+        sc.close();
     }
 
 
