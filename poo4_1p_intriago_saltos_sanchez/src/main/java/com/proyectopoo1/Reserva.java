@@ -16,8 +16,8 @@ public class Reserva {
 
 
     // Constructores
-    public Reserva(String codUnico, String codUnicoUser, String numCedulaUser, Date fechaReserva, String codUnicoEspacio, String tipoEspacioReservado, EstadoReserva estadoReserva, String motivoReserva){
-        this.codUnico = codUnico;
+    public Reserva(String codUnicoUser, String numCedulaUser, Date fechaReserva, String codUnicoEspacio, String tipoEspacioReservado, EstadoReserva estadoReserva, String motivoReserva){
+        this.codUnico = generarCodUnico();
         this.fechaReserva = fechaReserva;
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
@@ -35,7 +35,8 @@ public class Reserva {
     }
 
     private String generarCodUnico(){
-        return "";
+        int ultimoCodUnico = Integer.parseInt(ManejoArchivo.leerArchivo("reservas.txt").get(ManejoArchivo.leerArchivo("reservas.txt").size()-1));
+        return "" + (ultimoCodUnico+1);
     }
 
     public String toString(){
