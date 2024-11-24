@@ -1,7 +1,8 @@
 package com.proyectopoo1;
 
+import java.text.SimpleDateFormat;
 //import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 public class Reserva {
 
@@ -28,6 +29,15 @@ public class Reserva {
         contador++;
     }
 
+    public Reserva(String codUnico, Usuario user, String fechaReserva, Espacio espacio, EstadoReserva estadoReserva, String motivoReserva){
+        this.codUnico = codUnico;
+        this.user = user;
+        this.fechaReserva = Date.valueOf(fechaReserva);
+        this.espacio = espacio;
+        this.estadoReserva = estadoReserva;
+        this.motivoReserva = motivoReserva;
+
+    }
 
     // Métodos adicionales
     public void cargarReserva(){
