@@ -1,6 +1,5 @@
 package com.proyectopoo1;
 
-//paquete para manejar ArrayList
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Estudiante extends Usuario{
@@ -181,6 +179,9 @@ public class Estudiante extends Usuario{
             if(option==1){
                 Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
                 reserva.cargarReserva();
+            }
+            else{
+                Sistema.main(null);
             }
         }
     }
