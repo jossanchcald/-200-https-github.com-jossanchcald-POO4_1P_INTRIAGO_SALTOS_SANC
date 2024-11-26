@@ -116,7 +116,7 @@ public class Estudiante extends Usuario{
         //mostrar las canchas o aulas disponibles
         System.out.println("1. AULA");
         System.out.println("2. CANCHA");
-        System.out.print("Ingrese el numero de la opcion del espacio que desea reservar: ");
+        System.out.print("Ingrese el numero de la opcion del tipo de espacio que desea reservar: ");
         int op = scanner.nextInt();
         scanner.nextLine();
 
@@ -126,23 +126,36 @@ public class Estudiante extends Usuario{
             scanner.nextLine();
         }
 
+        ArrayList<Espacio> espaciosDis = new ArrayList<>();
         if(op==1){
             for(Espacio espacio : espacios){
                 if(espacio.getTipoEspacio() == TipoEspacio.AULA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
-                    System.out.println("-- "+espacio.toString());
+                    espaciosDis.add(espacio);
                 }
             }
 
         } else if(op==2){
             for(Espacio espacio : espacios){
                 if(espacio.getTipoEspacio() == TipoEspacio.CANCHA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
-                    System.out.println("-- "+espacio.toString());
+                    espaciosDis.add(espacio);
                 }
             }
 
         }
-        System.out.print("Ingrese el código único del espacio que desea reservar: ");
-        String cod = scanner.nextLine();
+
+        for(int i=0; i<espaciosDis.size();i++){
+            System.out.println((i+1)+". " + espaciosDis.get(i).toString());
+        }
+
+        System.out.println("Ingrese la opcion del espacio que desea reservar: ");
+        int ops = scanner.nextInt();
+        scanner.nextLine();
+        while(ops < 1 || ops > espaciosDis.size() ){
+            System.out.println("opcion invalida. Ingresa una opcion valida: ");
+            ops = scanner.nextInt();
+            scanner.nextLine();
+        }
+     
 
         
         
