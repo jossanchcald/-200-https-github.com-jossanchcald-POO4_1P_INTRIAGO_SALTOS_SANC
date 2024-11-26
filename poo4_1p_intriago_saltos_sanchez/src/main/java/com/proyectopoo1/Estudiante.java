@@ -1,21 +1,21 @@
 package com.proyectopoo1;
 
 //paquete para manejar ArrayList
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Scanner;
 
-
-//paquetes para enviar correo
-import javax.mail.*;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import io.github.cdimascio.dotenv.*;
-import java.util.Properties;
 
-//paquetes para trabajar con fechas
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Estudiante extends Usuario{
 
@@ -90,12 +90,16 @@ public class Estudiante extends Usuario{
         }
     }
 
+
+    @Override
     //gestionarReserva() para estudiante
     public void gestionarReserva(ArrayList<Espacio> espacios){
+
         Scanner scanner = new Scanner(System.in);
         LocalDate fecha = null;
         boolean fechaValida = false;
         String entrada;
+
         //valida si la fecha ingresada es valida en el formato yyyy-MM-dd
         while (!fechaValida) {
             System.out.print("Ingresa una fecha (yyyy-MM-dd): ");
@@ -108,14 +112,40 @@ public class Estudiante extends Usuario{
                 System.out.println("Formato de fecha inválido. Por favor, intenta de nuevo.");
             }
         }
-        scanner.close();
+        
         //mostrar las canchas o aulas disponibles
+        System.out.println("1. AULA");
+        System.out.println("2. CANCHA");
+        System.out.print("Ingrese el numero de la opcion del espacio que desea reservar: ");
+        int op = scanner.nextInt();
+        scanner.nextLine();
 
-        for(Espacio espacio : espacios){
-            if((espacio.getTipoEspacio() == (TipoEspacio.CANCHA) || espacio.getTipoEspacio() == (TipoEspacio.AULA)) && espacio.getEstadoEsp() == (DisponibilidadEsp.DISPONIBLE)){
-                System.out.println(espacio.toString());
-            }
+        while(op < 1 || op > 2 ){
+            System.out.println("opcion invalida. Ingresa una opcion valida: ");
+            op = scanner.nextInt();
+            scanner.nextLine();
         }
+
+        if(op==1){
+            for(Espacio espacio : espacios){
+                if(espacio.getTipoEspacio() == TipoEspacio.AULA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
+                    System.out.println("-- "+espacio.toString());
+                }
+            }
+
+        } else if(op==2){
+            for(Espacio espacio : espacios){
+                if(espacio.getTipoEspacio() == TipoEspacio.CANCHA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
+                    System.out.println("-- "+espacio.toString());
+                }
+            }
+
+        }
+        System.out.print("Ingrese el código único del espacio que desea reservar: ");
+        String cod = scanner.nextLine();
+
+        
+        
     }
 
 }

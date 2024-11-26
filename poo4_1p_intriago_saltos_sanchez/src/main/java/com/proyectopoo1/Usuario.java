@@ -1,5 +1,6 @@
 package com.proyectopoo1;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Usuario {
@@ -24,7 +25,7 @@ public abstract class Usuario {
     }
 
     //metodos adicionales
-    public abstract void gestionarReserva();
+    public abstract void gestionarReserva(ArrayList<Espacio> espacios);
 
     public void consultarReserva(Date fecha){};
 

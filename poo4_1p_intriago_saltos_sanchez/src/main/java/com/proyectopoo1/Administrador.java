@@ -1,10 +1,17 @@
 package com.proyectopoo1;
 
-import javax.mail.*;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import io.github.cdimascio.dotenv.*;
-import java.util.Properties;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 
 public class Administrador extends Usuario{
@@ -64,5 +71,11 @@ public class Administrador extends Usuario{
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void gestionarReserva(ArrayList<Espacio> espacios) {
+        // TODO Auto-generated method stub
+        
     }
 }

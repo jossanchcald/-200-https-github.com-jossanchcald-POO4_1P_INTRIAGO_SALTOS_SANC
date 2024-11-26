@@ -79,7 +79,12 @@ public class Profesor extends Usuario{
             System.out.println(e.getMessage());
         }
     }
-
+    
+    @Override
+    public void gestionarReserva(ArrayList<Espacio> espacios) {
+        // TODO Auto-generated method stub
+        
+    }
 
 
 

@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import org.w3c.dom.UserDataHandler;
+
 
 public class Sistema {
     public static ArrayList<Usuario> usuarios;
@@ -129,11 +131,7 @@ public class Sistema {
         }while(booly==false);
         Usuario user = iniciarSesion(userIn, passwordIn);
 
-        do { 
-            cargarReserva();
-            
-        } while (true);
-
+        user.gestionarReserva(espacios);
 
         
       
