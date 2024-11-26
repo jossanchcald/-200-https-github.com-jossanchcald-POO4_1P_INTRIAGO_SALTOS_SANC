@@ -1,9 +1,8 @@
 package com.proyectopoo1;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
-import org.w3c.dom.UserDataHandler;
 
 
 public class Sistema {
@@ -98,7 +97,7 @@ public class Sistema {
                     espacio = e;
                 }
             }
-            reservas.add(new Reserva(datos[0], userR, datos[3],espacio,EstadoReserva.valueOf(datos[6]),datos[7]));
+            reservas.add(new Reserva(datos[0], userR, LocalDate.parse(datos[3]),espacio,EstadoReserva.valueOf(datos[6]),datos[7]));
 
         }   
     }
@@ -111,6 +110,7 @@ public class Sistema {
         cargarEspacio();
 
        
+      
         // PROGRAMA PRINCIPAL
         System.out.println("BIENVENIDO AL SISTEMA DE RESERVAS DE ESPACIOS -ESPOL-");
         boolean booly;

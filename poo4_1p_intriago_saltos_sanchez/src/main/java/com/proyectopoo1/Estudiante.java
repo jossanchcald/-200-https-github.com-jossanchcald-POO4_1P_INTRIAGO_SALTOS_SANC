@@ -155,9 +155,28 @@ public class Estudiante extends Usuario{
             ops = scanner.nextInt();
             scanner.nextLine();
         }
-     
+        Espacio esp = espaciosDis.get(ops-1);
 
-        
+        System.out.println("BIEN!");
+        System.out.print("Ahora ingresa el motivo de tu reserva: ");
+        String motivo = scanner.nextLine();
+
+        System.out.println("¿Desea crear la reserva: ");
+        System.out.println("1. SI");
+        System.out.println("2. NO");
+        System.out.print("Ingrese la opción: ");
+        int option = scanner.nextInt();
+        scanner.nextLine();
+        while(option < 1 || option > 2 ){
+            System.out.println("opcion invalida. Ingresa una opcion valida: ");
+            option = scanner.nextInt();
+            scanner.nextLine();
+        }
+
+        if(option==1){
+            Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
+
+        }
         
     }
 

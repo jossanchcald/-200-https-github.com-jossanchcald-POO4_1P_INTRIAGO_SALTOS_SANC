@@ -1,15 +1,13 @@
 package com.proyectopoo1;
 
-import java.text.SimpleDateFormat;
-//import java.time.LocalDate;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Reserva {
 
     // Variables de instancia
     private String codUnico;
     private Usuario user; 
-    private Date fechaReserva; // Se recomienda el uso de LocalDate de java.time, ya que Date es obsoleto
+    private LocalDate fechaReserva; // Se recomienda el uso de LocalDate de java.time, ya que Date es obsoleto
     private Espacio espacio; 
     private EstadoReserva estadoReserva;
     private String motivoReserva;
@@ -17,21 +15,20 @@ public class Reserva {
 
 
     // Constructores
-    public Reserva(String codUnicoUser, String numCedulaUser, Date fechaReserva, String codUnicoEspacio, String tipoEspacioReservado, EstadoReserva estadoReserva, String motivoReserva){
+    public Reserva(Usuario user, LocalDate fechaReserva, Espacio espacio, EstadoReserva estadoReserva, String motivoReserva){
         this.codUnico = generarCodUnico();
+        this.user = user;
         this.fechaReserva = fechaReserva;
+        this.espacio = espacio;
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
-        this.user.setCodUnico(codUnicoUser);
-        this.espacio.setCodUnico(codUnicoEspacio);
-        this.espacio.setTipoEspacio(TipoEspacio.valueOf(tipoEspacioReservado.toUpperCase()));
         contador++;
-    }
 
-    public Reserva(String codUnico, Usuario user, String fechaReserva, Espacio espacio, EstadoReserva estadoReserva, String motivoReserva){
+    } 
+    public Reserva(String codUnico, Usuario user, LocalDate fechaReserva, Espacio espacio, EstadoReserva estadoReserva, String motivoReserva){
         this.codUnico = codUnico;
         this.user = user;
-        this.fechaReserva = Date.valueOf(fechaReserva);
+        this.fechaReserva = fechaReserva;
         this.espacio = espacio;
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
@@ -68,7 +65,7 @@ public class Reserva {
         return espacio;
     }
 
-    public Date getFechaReserva(){
+    public LocalDate getFechaReserva(){
         return fechaReserva;
     }
 
@@ -98,7 +95,7 @@ public class Reserva {
         this.espacio = espacio;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
+    public void setFechaReserva(LocalDate fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
 
