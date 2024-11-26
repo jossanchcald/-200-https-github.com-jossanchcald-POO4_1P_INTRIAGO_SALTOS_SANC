@@ -74,7 +74,7 @@ public class Administrador extends Usuario{
     }
 
     @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios) {
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas) {
         // TODO Auto-generated method stub
         
     }

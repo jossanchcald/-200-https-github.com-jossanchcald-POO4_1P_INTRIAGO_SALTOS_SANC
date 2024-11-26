@@ -93,7 +93,7 @@ public class Estudiante extends Usuario{
 
     @Override
     //gestionarReserva() para estudiante
-    public void gestionarReserva(ArrayList<Espacio> espacios){
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
 
         Scanner scanner = new Scanner(System.in);
         LocalDate fecha = null;
@@ -112,72 +112,77 @@ public class Estudiante extends Usuario{
                 System.out.println("Formato de fecha inválido. Por favor, intenta de nuevo.");
             }
         }
-        
-        //mostrar las canchas o aulas disponibles
-        System.out.println("1. AULA");
-        System.out.println("2. CANCHA");
-        System.out.print("Ingrese el numero de la opcion del tipo de espacio que desea reservar: ");
-        int op = scanner.nextInt();
-        scanner.nextLine();
 
-        while(op < 1 || op > 2 ){
-            System.out.println("opcion invalida. Ingresa una opcion valida: ");
-            op = scanner.nextInt();
+        boolean valida = verificarFecha(reservas, fecha);
+        if(valida==false){
+            System.out.println("Ya tiene una reserva para la fecha" + fecha);
+        }else{
+            
+            //mostrar las canchas o aulas disponibles
+            System.out.println("1. AULA");
+            System.out.println("2. CANCHA");
+            System.out.print("Ingrese el numero de la opcion del tipo de espacio que desea reservar: ");
+            int op = scanner.nextInt();
             scanner.nextLine();
-        }
 
-        ArrayList<Espacio> espaciosDis = new ArrayList<>();
-        if(op==1){
-            for(Espacio espacio : espacios){
-                if(espacio.getTipoEspacio() == TipoEspacio.AULA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
-                    espaciosDis.add(espacio);
-                }
+            while(op < 1 || op > 2 ){
+                System.out.println("opcion invalida. Ingresa una opcion valida: ");
+                op = scanner.nextInt();
+                scanner.nextLine();
             }
 
-        } else if(op==2){
-            for(Espacio espacio : espacios){
-                if(espacio.getTipoEspacio() == TipoEspacio.CANCHA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
-                    espaciosDis.add(espacio);
+            ArrayList<Espacio> espaciosDis = new ArrayList<>();
+            if(op==1){
+                for(Espacio espacio : espacios){
+                    if(espacio.getTipoEspacio() == TipoEspacio.AULA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
+                        espaciosDis.add(espacio);
+                    }
                 }
+
+            } else if(op==2){
+                for(Espacio espacio : espacios){
+                    if(espacio.getTipoEspacio() == TipoEspacio.CANCHA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
+                        espaciosDis.add(espacio);
+                    }
+                }
+
             }
 
-        }
+            for(int i=0; i<espaciosDis.size();i++){
+                System.out.println((i+1)+". " + espaciosDis.get(i).toString());
+            }
 
-        for(int i=0; i<espaciosDis.size();i++){
-            System.out.println((i+1)+". " + espaciosDis.get(i).toString());
-        }
-
-        System.out.println("Ingrese la opcion del espacio que desea reservar: ");
-        int ops = scanner.nextInt();
-        scanner.nextLine();
-        while(ops < 1 || ops > espaciosDis.size() ){
-            System.out.println("opcion invalida. Ingresa una opcion valida: ");
-            ops = scanner.nextInt();
+            System.out.println("Ingrese la opcion del espacio que desea reservar: ");
+            int ops = scanner.nextInt();
             scanner.nextLine();
-        }
-        Espacio esp = espaciosDis.get(ops-1);
+            while(ops < 1 || ops > espaciosDis.size() ){
+                System.out.println("opcion invalida. Ingresa una opcion valida: ");
+                ops = scanner.nextInt();
+                scanner.nextLine();
+            }
+            Espacio esp = espaciosDis.get(ops-1);
 
-        System.out.println("BIEN!");
-        System.out.print("Ahora ingresa el motivo de tu reserva: ");
-        String motivo = scanner.nextLine();
+            System.out.println("BIEN!");
+            System.out.print("Ahora ingresa el motivo de tu reserva: ");
+            String motivo = scanner.nextLine();
 
-        System.out.println("¿Desea crear la reserva: ");
-        System.out.println("1. SI");
-        System.out.println("2. NO");
-        System.out.print("Ingrese la opción: ");
-        int option = scanner.nextInt();
-        scanner.nextLine();
-        while(option < 1 || option > 2 ){
-            System.out.println("opcion invalida. Ingresa una opcion valida: ");
-            option = scanner.nextInt();
+            System.out.println("¿Desea crear la reserva: ");
+            System.out.println("1. SI");
+            System.out.println("2. NO");
+            System.out.print("Ingrese la opción: ");
+            int option = scanner.nextInt();
             scanner.nextLine();
-        }
+            while(option < 1 || option > 2 ){
+                System.out.println("opcion invalida. Ingresa una opcion valida: ");
+                option = scanner.nextInt();
+                scanner.nextLine();
+            }
 
-        if(option==1){
-            Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
-            reserva.cargarReserva();
+            if(option==1){
+                Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
+                reserva.cargarReserva();
+            }
         }
-        
     }
 
 }

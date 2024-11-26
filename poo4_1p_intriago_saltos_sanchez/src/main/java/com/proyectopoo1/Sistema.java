@@ -130,8 +130,8 @@ public class Sistema {
 
         }while(booly==false);
         Usuario user = iniciarSesion(userIn, passwordIn);
-
-        user.gestionarReserva(espacios);
+        cargarReserva();
+        user.gestionarReserva(espacios,reservas);
 
         
       

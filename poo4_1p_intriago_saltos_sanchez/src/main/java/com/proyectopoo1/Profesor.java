@@ -1,11 +1,17 @@
 package com.proyectopoo1;
 
 import java.util.ArrayList;
-import javax.mail.*;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import io.github.cdimascio.dotenv.*;
-import java.util.Properties;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Profesor extends Usuario{
 
@@ -81,7 +87,7 @@ public class Profesor extends Usuario{
     }
     
     @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios) {
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas) {
         // TODO Auto-generated method stub
         
     }

@@ -1,7 +1,8 @@
 package com.proyectopoo1;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public abstract class Usuario {
     // Variables de instancia protected porque serán heredados a los distintos tipos de usuarios
@@ -25,9 +26,19 @@ public abstract class Usuario {
     }
 
     //metodos adicionales
-    public abstract void gestionarReserva(ArrayList<Espacio> espacios);
+    public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
 
-    public void consultarReserva(Date fecha){};
+    public Boolean verificarFecha(ArrayList<Reserva> r, LocalDate fecha){
+        for(Reserva reserva: r){
+            if(reserva.getUser()==this && reserva.getFechaReserva().equals(fecha)){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public void consultarReserva(LocalDate fecha){};
 
     public void enviarCorreo(){};
 
