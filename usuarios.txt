@@ -13,3 +13,4 @@
 013 | 0954321789 | David | Castillo | dcastillo | castillo2023 | dcastillo@universidad.edu | E
 014 | 0943219876 | Laura | Peña | lpena | pena456 | lpena@universidad.edu | P
 015 | 0967891234 | Alejandro | Ramos | aramos | ramos123 | aramos@universidad.edu | A
+016 | 0943654335 | Administrador | Prueba | poo.proyecto.ISS | pooProyectoISS | kelvintr@espol.edu.ec | A
