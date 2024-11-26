@@ -32,9 +32,6 @@ public abstract class Usuario {
 
     public void enviarCorreo(String materia){}
 
-    
-
-
     //getters
     public String getCodUnico(){
         return codUnico;

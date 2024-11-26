@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 
 public class Sistema {
-    public static ArrayList<Usuario> usuarios = new ArrayList<>();
-    public static ArrayList<Espacio> espacios = new ArrayList<>();
-    public static ArrayList<Reserva> reservas = new ArrayList<>(); 
+    public static ArrayList<Usuario> usuarios;
+    public static ArrayList<Espacio> espacios;
+    public static ArrayList<Reserva> reservas; 
 
-
+    // Metodo para validar cuenta 
     public static boolean validarCuenta(String user, String contrasenia){
         for (Usuario usuario : usuarios) {
             if(usuario.getUser().equals(user) & usuario.getPassword().equals(contrasenia)){
@@ -18,7 +18,8 @@ public class Sistema {
         }
         return false;
     }
-
+ 
+    // Método para iniciar sesión
     public static Usuario iniciarSesion(String user, String contrasenia){
         for(Usuario usuario: usuarios){
             if(usuario.getUser().equals(user) & usuario.getPassword().equals(contrasenia)){
@@ -29,12 +30,9 @@ public class Sistema {
     }
 
 
-
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        
-        // carga de ArrayList de usuarios
+    // Método para cargar archivo de usuario
+    public static void cargarUsuario(){
+        usuarios = new ArrayList<>();
         for(String linea: ManejoArchivo.leerArchivo("usuarios.txt")){
             String[] datos = linea.split(" \\| ");
 
@@ -67,12 +65,49 @@ public class Sistema {
                     break;
             }
         }
-        
-        // carga de Arraylist de espacios 
+
+    }
+
+
+    // Método para cargar espacios 
+    public static void cargarEspacio(){
+        espacios = new ArrayList<>();
         for(String linea: ManejoArchivo.leerArchivo("espacios.txt")){
             String[] datos = linea.split(" \\| ");
             espacios.add(new Espacio(datos[0], TipoEspacio.valueOf(datos[1]), datos[2], Integer.parseInt(datos[3]), DisponibilidadEsp.valueOf(datos[4]), UsuarioPermitido.valueOf(datos[5])));
         }
+    }
+
+    // Método para cargar reservas
+    public static void cargarReserva(){
+        reservas = new ArrayList<>();
+        for(String linea: ManejoArchivo.leerArchivo("reservas.txt")){
+            String[] datos = linea.split(" \\| ");
+            Usuario userR = null;
+            Espacio espacio = null;
+            for(Usuario u: usuarios){
+                if(u.getCodUnico().equals(datos[1])){
+                    userR = u;
+                }
+            }
+
+            for(Espacio e: espacios){
+                if(e.getCodUnico().equals(datos[4])){
+                    espacio = e;
+                }
+            }
+            reservas.add(new Reserva(datos[0], userR, datos[3],espacio,EstadoReserva.valueOf(datos[6]),datos[7]));
+
+        }   
+    }
+
+    // Método main
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        cargarUsuario();
+        cargarEspacio();
+
        
         // PROGRAMA PRINCIPAL
         System.out.println("BIENVENIDO AL SISTEMA DE RESERVAS DE ESPACIOS -ESPOL-");
@@ -93,29 +128,15 @@ public class Sistema {
 
         }while(booly==false);
         Usuario user = iniciarSesion(userIn, passwordIn);
+
+        do { 
+            cargarReserva();
+            
+        } while (true);
+
+
         
-        do{
-            // cargar reserva
-            for(String linea: ManejoArchivo.leerArchivo("reservas.txt")){
-                String[] datos = linea.split(" \\| ");
-                Usuario userR = null;
-                Espacio espacio = null;
-                for(Usuario u: usuarios){
-                    if(u.getCodUnico().equals(datos[1])){
-                        userR = u;
-                    }
-                }
-
-                for(Espacio e: espacios){
-                    if(e.getCodUnico().equals(datos[4])){
-                        espacio = e;
-                    }
-                }
-                reservas.add(new Reserva(datos[0], userR, datos[3],espacio,EstadoReserva.valueOf(datos[6]),datos[7]));
-
-            }   
-         
-        }
+      
 
     
  

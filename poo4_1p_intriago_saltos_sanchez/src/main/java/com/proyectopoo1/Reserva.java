@@ -22,7 +22,6 @@ public class Reserva {
         this.fechaReserva = fechaReserva;
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
-        
         this.user.setCodUnico(codUnicoUser);
         this.espacio.setCodUnico(codUnicoEspacio);
         this.espacio.setTipoEspacio(TipoEspacio.valueOf(tipoEspacioReservado.toUpperCase()));
@@ -36,6 +35,7 @@ public class Reserva {
         this.espacio = espacio;
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
+        contador++;
 
     }
 
@@ -49,6 +49,7 @@ public class Reserva {
         return "" + (ultimoCodUnico+1);
     }
 
+    @Override
     public String toString(){
         return codUnico + " | " + user.codUnico + " | " + user.getNumCedula() + " | " + fechaReserva + " | " + espacio.getCodUnico() + " | " + espacio.getTipoEspacio() + " | " + estadoReserva + " | " + motivoReserva;
     }
