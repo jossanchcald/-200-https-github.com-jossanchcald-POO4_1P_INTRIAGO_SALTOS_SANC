@@ -56,7 +56,7 @@ public class ManejoArchivo {
             for(String linea: datosAEscr){
                 bw.write(linea+"\n");
             }
-            System.out.println("ksdsdlsd");
+            System.out.println();
 
         } catch (IOException e) {
             e.printStackTrace(System.out);

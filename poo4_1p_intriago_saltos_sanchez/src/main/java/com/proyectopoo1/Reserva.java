@@ -1,6 +1,7 @@
 package com.proyectopoo1;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Reserva {
 
@@ -38,11 +39,17 @@ public class Reserva {
 
     // Métodos adicionales
     public void cargarReserva(){
-
+        
+        ArrayList<String> datosAEscr = ManejoArchivo.leerArchivo("reservas.txt");
+        datosAEscr.add(this.toString());
+        ManejoArchivo.escribirArchivo("reservas.txt", datosAEscr);
     }
 
     private String generarCodUnico(){
-        int ultimoCodUnico = Integer.parseInt(ManejoArchivo.leerArchivo("reservas.txt").get(ManejoArchivo.leerArchivo("reservas.txt").size()-1));
+        ArrayList<String> lista = ManejoArchivo.leerArchivo("reservas.txt");
+        String[] datos = lista.get(lista.size()-1).split(" \\| ");
+
+        int ultimoCodUnico = Integer.parseInt(datos[0]);
         return "" + (ultimoCodUnico+1);
     }
 

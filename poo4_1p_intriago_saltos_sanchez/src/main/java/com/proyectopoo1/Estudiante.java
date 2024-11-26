@@ -175,7 +175,7 @@ public class Estudiante extends Usuario{
 
         if(option==1){
             Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
-
+            reserva.cargarReserva();
         }
         
     }
