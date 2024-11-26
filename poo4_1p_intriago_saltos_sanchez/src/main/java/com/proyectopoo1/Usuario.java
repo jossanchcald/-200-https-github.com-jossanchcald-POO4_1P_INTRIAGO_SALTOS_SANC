@@ -32,6 +32,7 @@ public abstract class Usuario {
 
     public void enviarCorreo(String materia){}
 
+    @Override
     public String toString(){return codUnico + " | " + 
                             numCedula + " | " + nombres + " | " + 
                             apellidos + " | " + user + " | " + 
