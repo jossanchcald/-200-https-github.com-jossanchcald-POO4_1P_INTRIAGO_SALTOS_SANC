@@ -24,9 +24,9 @@ public abstract class Usuario {
     }
 
     //metodos adicionales
-    public void gestionarReserva(){}
+    public abstract void gestionarReserva();
 
-    public void consultarReserva(Date fecha){}
+    public abstract void consultarReserva(Date fecha);
 
     public void enviarCorreo(){}
 
