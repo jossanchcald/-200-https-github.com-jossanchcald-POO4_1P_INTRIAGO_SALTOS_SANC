@@ -21,7 +21,8 @@ public class Espacio {
     }
 
     public String toString(){
-        return this.permiso + this.nombreEsp;
+        return codUnico + " | " + tipoEspacio + " | " + nombreEsp + " | " + capacidadEsp + " | " + estadoEsp + " | " + permiso;
+
     }
 
     // getters 

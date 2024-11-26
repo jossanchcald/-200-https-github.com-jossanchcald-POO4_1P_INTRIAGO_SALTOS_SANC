@@ -26,16 +26,13 @@ public abstract class Usuario {
     //metodos adicionales
     public abstract void gestionarReserva();
 
-    public abstract void consultarReserva(Date fecha);
+    public void consultarReserva(Date fecha){};
 
-    public void enviarCorreo(){}
+    public void enviarCorreo(){};
 
     public void enviarCorreo(String materia){}
 
-    public String toString(){return codUnico + " | " + 
-                            numCedula + " | " + nombres + " | " + 
-                            apellidos + " | " + user + " | " + 
-                            password + " | " + correo + " | " ;}
+    
 
 
     //getters
@@ -83,5 +80,12 @@ public abstract class Usuario {
     public void setCorreo(String correo){
         this.correo = correo;
     }
+    
+
+    
+    public String toString(){return codUnico + " | " + 
+                            numCedula + " | " + nombres + " | " + 
+                            apellidos + " | " + user + " | " + 
+                            password + " | " + correo + " | " ;}
 
 }

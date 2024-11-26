@@ -1,2 +1,3 @@
 Falta definir cuerpo de los metodos adicionales en reserva
 Falta configurar el mensaje de enviar correo en todos las clases que heredan de Usuario
+Falta implementar la condición en el while

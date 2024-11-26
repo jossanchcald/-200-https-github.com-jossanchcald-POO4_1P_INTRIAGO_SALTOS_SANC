@@ -1,12 +1,21 @@
 package com.proyectopoo1;
 
+//paquete para manejar ArrayList
+import java.util.ArrayList;
 
+
+//paquetes para enviar correo
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
+//paquetes para trabajar con fechas
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 public class Estudiante extends Usuario{
 
@@ -78,6 +87,34 @@ public class Estudiante extends Usuario{
             Transport.send(message);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    //gestionarReserva() para estudiante
+    public void gestionarReserva(ArrayList<Espacio> espacios){
+        Scanner scanner = new Scanner(System.in);
+        LocalDate fecha = null;
+        boolean fechaValida = false;
+        String entrada;
+        //valida si la fecha ingresada es valida en el formato yyyy-MM-dd
+        while (!fechaValida) {
+            System.out.print("Ingresa una fecha (yyyy-MM-dd): ");
+            entrada = scanner.nextLine();
+
+            try {
+                fecha = LocalDate.parse(entrada);
+                fechaValida = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha inválido. Por favor, intenta de nuevo.");
+            }
+        }
+        scanner.close();
+        //mostrar las canchas o aulas disponibles
+
+        for(Espacio espacio : espacios){
+            if((espacio.getTipoEspacio() == (TipoEspacio.CANCHA) || espacio.getTipoEspacio() == (TipoEspacio.AULA)) && espacio.getEstadoEsp() == (DisponibilidadEsp.DISPONIBLE)){
+                System.out.println(espacio.toString());
+            }
         }
     }
 
