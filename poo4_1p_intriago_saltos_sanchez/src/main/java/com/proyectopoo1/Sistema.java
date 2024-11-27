@@ -165,15 +165,10 @@ public class Sistema {
                 System.out.println("1. Reservar");
                 System.out.println("2. Consultar reserva");
                 System.out.println("3. Cerrar sesión");
-                System.out.print("\nIngresa el numero de la opcion a la que deseas ingresar: ");
-                int opc = sc.nextInt();
-                sc.nextLine();
+              
+                int opc = Usuario.elegirOpcion(1, 3);
+              
 
-                while (opc < 1 || opc > 3) {
-                    System.out.print("Opción invalida. Ingresa una opción válida: ");
-                    opc = sc.nextInt();
-                    sc.nextLine();
-                }
 
                 switch (opc) {
                     case 1:
@@ -196,15 +191,7 @@ public class Sistema {
                 System.out.println("1. Gestionar Reserva");
                 System.out.println("2. Consultar reserva");
                 System.out.println("3. Cerrar sesión");
-                System.out.print("Ingresa el numero de la opcion a la que deseas ingresar: ");
-                int opc = sc.nextInt();
-                sc.nextLine();
-
-                while (opc < 1 || opc > 3) {
-                    System.out.println("Opción invalida. Ingresa una opción válida: ");
-                    opc = sc.nextInt();
-                    sc.nextLine();
-                }
+                int opc = Usuario.elegirOpcion(1, 3);
 
                 switch (opc) {
                     case 1:

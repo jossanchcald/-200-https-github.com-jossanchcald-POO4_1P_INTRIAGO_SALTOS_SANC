@@ -121,15 +121,8 @@ public class Administrador extends Usuario{
         System.out.println("\nOpciones:");
         System.out.println("1. Aprobar");
         System.out.println("2. Rechazar");
-        System.out.print("Ingrese la opcion a realizar (1,2): ");
-        String de = sc.nextLine();  
-        int decs = Integer.parseInt(de);  
+        int decs = elegirOpcion(1,2);
         
-        while (decs < 1 || decs > 2) {
-            System.out.print("\nOpción invalida. Ingresa una opción válida: ");
-            de = sc.nextLine();  
-            decs = Integer.parseInt(de);  
-        }
 
         switch (decs) {
             case 1:

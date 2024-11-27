@@ -1,8 +1,10 @@
 package com.proyectopoo1.entidades;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Scanner;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -56,6 +58,51 @@ public abstract class Usuario {
         return true;
 
     }
+
+
+
+    public static LocalDate validarFecha(){
+        Scanner scanner = new Scanner(System.in);
+
+        LocalDate fecha = null;
+        boolean fechaValida = false;
+        String entrada;
+
+        //valida si la fecha ingresada es valida en el formato yyyy-MM-dd
+        while (!fechaValida) {
+            System.out.print("Ingresa una fecha (yyyy-MM-dd): ");
+            entrada = scanner.nextLine();
+
+            try {
+                fecha = LocalDate.parse(entrada);
+                fechaValida = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha inválido. Por favor, intenta de nuevo.");
+            }
+        }
+        return fecha;
+    }
+
+
+
+
+    public static int elegirOpcion(int num1, int num2){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el numero de la opcion que desea escoger: ");
+        int op = scanner.nextInt();
+        scanner.nextLine();
+
+        while(op < num1 || op > num2 ){
+            System.out.println("opcion invalida. Ingresa una opcion valida: ");
+            op = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return op;
+
+    }
+
+
 
     public void consultarReserva(LocalDate fecha){};
 
@@ -185,7 +232,7 @@ public abstract class Usuario {
     }
     
 
-    
+    @Override
     public String toString(){return codUnico + " | " + 
                             numCedula + " | " + nombres + " | " + 
                             apellidos + " | " + user + " | " + 

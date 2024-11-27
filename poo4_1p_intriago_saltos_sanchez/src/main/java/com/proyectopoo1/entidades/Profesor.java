@@ -34,7 +34,6 @@ public class Profesor extends Usuario{
         return materiasDict;
     }
     
-    
     // Setters
     public void setFacultad(String facultad) {
         this.facultad = facultad;
@@ -44,26 +43,14 @@ public class Profesor extends Usuario{
         this.materiasDict = materiasDict;
     }
     
+
+
+
     //gestionarReserva() para profesor
     @Override
     public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas) {
         Scanner scanner = new Scanner(System.in);
-        LocalDate fecha = null;
-        boolean fechaValida = false;
-        String entrada;
-
-        //valida si la fecha ingresada es valida en el formato yyyy-MM-dd
-        while (!fechaValida) {
-            System.out.print("Ingresa una fecha (yyyy-MM-dd): ");
-            entrada = scanner.nextLine();
-
-            try {
-                fecha = LocalDate.parse(entrada);
-                fechaValida = true;
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de fecha inválido. Por favor, intenta de nuevo.");
-            }
-        }
+        LocalDate fecha = validarFecha();
         
         boolean valida = verificarFecha(reservas, fecha);
         if(valida==false){
@@ -73,15 +60,8 @@ public class Profesor extends Usuario{
             System.out.println("1. AULA");
             System.out.println("2. LABORATORIO");
             System.out.println("3. AUDITORIO");
-            System.out.print("Ingrese el numero de la opcion del tipo de espacio que desea reservar: ");
-            int opcionTipoElegido = scanner.nextInt();
-            scanner.nextLine();
-
-            while(opcionTipoElegido < 1 || opcionTipoElegido > 3 ){
-                System.out.println("opcion invalida. Ingresa una opcion valida: ");
-                opcionTipoElegido = scanner.nextInt();
-                scanner.nextLine();
-            }
+            int opcionTipoElegido = elegirOpcion(1, 3);
+           
             ArrayList<Espacio> espaciosDisponibles = new ArrayList<>(); 
             
             switch (opcionTipoElegido) {
@@ -126,37 +106,22 @@ public class Profesor extends Usuario{
                 for(int i=0; i<espaciosDisponibles.size();i++){
                     System.out.println((i+1)+". " + espaciosDisponibles.get(i).toString());
                 }
-
-                System.out.println("Ingrese la opcion del espacio que desea reservar: ");
-                int ops = scanner.nextInt();
-                scanner.nextLine();
-                while(ops < 1 || ops > espaciosDisponibles.size() ){
-                    System.out.println("opcion invalida. Ingresa una opcion valida: ");
-                    ops = scanner.nextInt();
-                    scanner.nextLine();
-                }
+                int ops = elegirOpcion(1, espaciosDisponibles.size());
                 Espacio esp = espaciosDisponibles.get(ops-1);
 
                 System.out.println("Elija la materia para la cual es la reserva");
                 for(int i=0;i<materiasDict.size();i++){
                     System.out.println((i+1) + ".- " + materiasDict.get(i));
                 }
-                System.out.println("Elija la materia para la cual es la reserva");
-                int opcionMateriaDictada = scanner.nextInt();
-                scanner.nextLine();
+                int opcionMateriaDictada = elegirOpcion(1, materiasDict.size());
                 String motivoDeReserva = materiasDict.get(opcionMateriaDictada - 1);
                 
                 System.out.println("¿Desea crear la reserva: ");
                 System.out.println("1. SI");
                 System.out.println("2. NO");
                 System.out.print("Ingrese la opción: ");
-                int opcionCrearReserva = scanner.nextInt();
-                scanner.nextLine();
-                while(opcionCrearReserva < 1 || opcionCrearReserva > 2 ){
-                    System.out.println("opcion invalida. Ingresa una opcion valida: ");
-                    opcionCrearReserva = scanner.nextInt();
-                    scanner.nextLine();
-                }
+                int opcionCrearReserva = elegirOpcion(1, 2);
+
 
                 if(opcionCrearReserva == 1){
                     Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.APROBADO,motivoDeReserva);
@@ -170,5 +135,15 @@ public class Profesor extends Usuario{
                     }  
             }
        }
+    }
+
+
+
+
+
+    @Override
+    public void consultarReserva(ArrayList<Reserva> reservas) {
+        // TODO Auto-generated method stub
+        
     }
 }
