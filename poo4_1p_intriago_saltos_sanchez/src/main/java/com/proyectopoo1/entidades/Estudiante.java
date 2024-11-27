@@ -161,7 +161,6 @@ public class Estudiante extends Usuario{
                 }
            }
         }
-        scanner.close();
     }
 
     @Override
@@ -191,6 +190,5 @@ public class Estudiante extends Usuario{
                 reserv.getEspacio().getCapacidadEsp() + " - " + reserv.getUser().getNombres() + " " + reserv.getUser().getApellidos() + " - " + reserv.getEstadoReserva());
             }
         }
-        sc.close();
     }
 }

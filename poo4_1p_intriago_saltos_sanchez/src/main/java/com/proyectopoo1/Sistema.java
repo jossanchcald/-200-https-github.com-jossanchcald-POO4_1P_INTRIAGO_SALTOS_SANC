@@ -113,7 +113,8 @@ public class Sistema {
                 }
             }
             reservas.add(new Reserva(datos[0], userR, LocalDate.parse(datos[3]), espacio, EstadoReserva.valueOf(datos[6]), datos[7]));
-        }   
+        }
+        Reserva.contador = reservas.size();
     }
 
 
@@ -224,8 +225,6 @@ public class Sistema {
             }
     
         } while(booly == true);
-        sc.close();
-
     }
 
         

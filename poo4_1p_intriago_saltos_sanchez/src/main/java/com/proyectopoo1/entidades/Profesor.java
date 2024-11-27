@@ -170,6 +170,5 @@ public class Profesor extends Usuario{
                     }  
             }
        }
-       scanner.close();
     }
 }

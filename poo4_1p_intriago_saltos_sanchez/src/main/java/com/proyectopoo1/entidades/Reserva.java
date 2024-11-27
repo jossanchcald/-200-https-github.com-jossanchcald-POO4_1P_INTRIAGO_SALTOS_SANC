@@ -36,8 +36,6 @@ public class Reserva {
         this.espacio = espacio;
         this.estadoReserva = estadoReserva;
         this.motivoReserva = motivoReserva;
-        contador++;
-
     }
 
     // Métodos adicionales
