@@ -1,5 +1,7 @@
 package com.proyectopoo1;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -102,20 +104,30 @@ public class Sistema {
         }   
     }
 
-    // Método main
+
+    // PROGRAMA PRINCIPAL
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         cargarUsuario();
-        cargarEspacio();
 
        
-      
         // PROGRAMA PRINCIPAL
-        System.out.println("BIENVENIDO AL SISTEMA DE RESERVAS DE ESPACIOS -ESPOL-");
-        boolean booly;
+        System.out.println(
+                        "██████╗░███████╗░██████╗███████╗██████╗░██╗░░░██╗███████╗██████╗░░█████╗░██╗░░░░░\r\n" + 
+                        "██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██║░░░██║██╔════╝██╔══██╗██╔══██╗██║░░░░░\r\n" + 
+                        "██████╔╝█████╗░░╚█████╗░█████╗░░██████╔╝╚██╗░██╔╝█████╗░░██████╔╝██║░░██║██║░░░░░\r\n" + 
+                        "██╔══██╗██╔══╝░░░╚═══██╗██╔══╝░░██╔══██╗░╚████╔╝░██╔══╝░░██╔═══╝░██║░░██║██║░░░░░\r\n" + 
+                        "██║░░██║███████╗██████╔╝███████╗██║░░██║░░╚██╔╝░░███████╗██║░░░░░╚█████╔╝███████╗\r\n" + 
+                        "╚═╝░░╚═╝╚══════╝╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░░╚════╝░╚══════╝╝"
+                        );
+
+        System.out.println("\n\t\t   Sistema de Reserva de Espacios de ESPOL\n\n");
+
+        boolean booly = false;
         String userIn;
         String passwordIn;
+        
 
         do{
             System.out.print("Ingrese su usuario: ");
@@ -125,13 +137,86 @@ public class Sistema {
             booly = validarCuenta(userIn, passwordIn);
 
             if(booly==false){
-                System.out.println("Credenciales incorrectas");
+                System.out.println("Credenciales incorrectas\n");
             }
 
         }while(booly==false);
+
         Usuario user = iniciarSesion(userIn, passwordIn);
-        cargarReserva();
-        user.gestionarReserva(espacios,reservas);
+
+        do { 
+            cargarEspacio();
+            cargarReserva();
+
+            if(user instanceof Estudiante || user instanceof Profesor){
+                System.out.println("\n\n");
+                System.out.println("Bienvenido/a " + user.nombres + ". ¿Qué deseas hacer el día de hoy?\n");
+                System.out.println("1. Reservar");
+                System.out.println("2. Consultar reserva");
+                System.out.println("3. Cerrar sesión");
+                System.out.print("\nIngresa el numero de la opcion a la que deseas ingresar: ");
+                int opc = sc.nextInt();
+                sc.nextLine();
+
+                while (opc < 1 || opc > 3) {
+                    System.out.print("Opción invalida. Ingresa una opción válida: ");
+                    opc = sc.nextInt();
+                    sc.nextLine();
+                }
+
+                switch (opc) {
+                    case 1:
+                        user.gestionarReserva(espacios, reservas);
+                        break;
+
+                    case 2:
+                        // user.consultarReserva();
+                        break;
+
+                    case 3:
+                        System.out.println("\nSesión correctamente cerrada.");
+                        System.out.println("¡Gracias por usar reservepol! Ten un buen dia :)");
+                        booly = false;
+                        break;
+                }
+               
+            }else if (user instanceof Administrador){
+                System.out.println("\n\n");
+                System.out.println("Bienvenido/a " + user.nombres + ". ¿Qué deseas hacer el día de hoy?\n");
+                System.out.println("1. Gestionar Reserva");
+                System.out.println("2. Consultar reserva");
+                System.out.println("3. Cerrar sesión");
+                System.out.print("\nIngresa el numero de la opcion a la que deseas ingresar: ");
+                int opc = sc.nextInt();
+                sc.nextLine();
+
+                while (opc < 1 || opc > 3) {
+                    System.out.println("Opción invalida. Ingresa una opción válida: ");
+                    opc = sc.nextInt();
+                    sc.nextLine();
+                }
+
+                switch (opc) {
+                    case 1:
+                        user.gestionarReserva(espacios, reservas);
+                        break;
+
+                    case 2:
+                        // user.consultarReserva();
+                        break;
+
+                    case 3:
+                        System.out.println("\nSesión correctamente cerrada.");
+                        System.out.println("¡Gracias por usar reservepol! Ten un buen dia :)");
+                        booly = false;
+                        break;
+                }
+            }
+    
+        } while(booly == true);
+        sc.close();
+
+    }
 
         
       
@@ -150,4 +235,4 @@ public class Sistema {
     }
 
 
-}
+
