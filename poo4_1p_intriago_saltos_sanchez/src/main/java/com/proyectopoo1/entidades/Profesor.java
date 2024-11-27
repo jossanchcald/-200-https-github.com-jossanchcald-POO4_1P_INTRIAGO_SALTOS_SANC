@@ -143,7 +143,15 @@ public class Profesor extends Usuario{
 
     @Override
     public void consultarReserva(ArrayList<Reserva> reservas) {
-        // TODO Auto-generated method stub
-        
+        Scanner sc = new Scanner(System.in);
+        LocalDate fecha = validarFecha();
+
+        for (Reserva reserv : reservas) {
+            if (reserv.getFechaReserva().equals(fecha) && reserv.getUser() == this) {
+                System.out.println("\nDatos reserva: \n");
+                System.out.println(reserv.getCodUnico() + " - " + fecha + " - " + reserv.getEspacio().getTipoEspacio() + " - " + reserv.getEspacio().getNombreEsp() + " - " + 
+                reserv.getEspacio().getCapacidadEsp() + " - " + reserv.getUser().getNombres() + " " + reserv.getUser().getApellidos() + " - " + reserv.getEstadoReserva());
+            }
+        }
     }
 }

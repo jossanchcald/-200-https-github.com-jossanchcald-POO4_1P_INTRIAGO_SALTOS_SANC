@@ -18,3 +18,4 @@
 5018 | 002 | 0912345678 | 2024-11-23 | 120 | AUDITORIO | APROBADO | Estructuras de Datos
 5019 | 004 | 0934567890 | 2024-12-17 | 110 | CANCHA | PENDIENTE | partido con mis amigos
 5020 | 002 | 0912345678 | 2024-06-21 | 120 | AUDITORIO | APROBADO | Estructuras de Datos
+5021 | 003 | 0923456789 | 2024-10-11 | 105 | AULA | PENDIENTE | Ayudant?as de F?sica
