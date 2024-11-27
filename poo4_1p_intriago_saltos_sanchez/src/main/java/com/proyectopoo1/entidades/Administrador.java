@@ -3,7 +3,6 @@ package com.proyectopoo1.entidades;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -12,6 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.proyectopoo1.enums.DisponibilidadEsp;
 import com.proyectopoo1.enums.EstadoReserva;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -40,7 +40,7 @@ public class Administrador extends Usuario{
     //enviar correo sobrescrito para administrador
     //falta configurar el mensaje
     @Override
-    public void enviarCorreo(String correoPE, String codReserva, String motivo, EstadoReserva decision){
+    public void enviarCorreo(String correoEst, String codReserva, String motivo, EstadoReserva decision){
 
         Dotenv dot = Dotenv.load();
 
@@ -130,6 +130,7 @@ public class Administrador extends Usuario{
             case 1:
                 this.enviarCorreo(reservaSol.getUser().getCorreo(), reservaSol.getCodUnico(), null, EstadoReserva.APROBADO);
                 reservaSol.setEstadoReserva(EstadoReserva.APROBADO);
+                reservaSol.getEspacio().setEstadoEsp(DisponibilidadEsp.RESERVADO);
                 System.out.println("\nSolicitud de reserva APROBADA correctamente.");
                 break;
         
@@ -144,4 +145,22 @@ public class Administrador extends Usuario{
         }
         sc.close();
     }
+
+    @Override
+    public void consultarReserva(ArrayList<Reserva> reservas){
+        System.out.println("\nNúmero de reservas creadas: " + Reserva.getContador() + "\n");
+        for (Reserva reserv : reservas) {
+            if (reserv.getUser() instanceof Estudiante) {
+                Estudiante estudiante = (Estudiante) reserv.getUser();
+                System.out.println(reserv.getCodUnico() + " - " + reserv.getEstadoReserva() + " - " + reserv.getFechaReserva() + 
+                                " - " + estudiante.getNombres() + " " + estudiante.getApellidos() + " - "  + estudiante.getNumMatricula());
+            }else if (reserv.getUser() instanceof Profesor) {
+                System.out.println(reserv.getCodUnico() + " - " + reserv.getEstadoReserva() + " - " + reserv.getFechaReserva() + 
+                                " - " + reserv.getUser().getNombres() + " " + reserv.getUser().getApellidos() + " - "  + reserv.getMotivoReserva());
+            }
+        }
+
+        System.out.println("\nTodas las reservas correctamente cargadas");
+    }
+
 }

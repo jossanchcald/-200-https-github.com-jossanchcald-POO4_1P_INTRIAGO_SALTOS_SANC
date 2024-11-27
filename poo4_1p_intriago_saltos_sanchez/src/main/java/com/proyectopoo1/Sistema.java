@@ -110,8 +110,7 @@ public class Sistema {
                     espacio = e;
                 }
             }
-            reservas.add(new Reserva(datos[0], userR, LocalDate.parse(datos[3]),espacio,EstadoReserva.valueOf(datos[6]),datos[7]));
-
+            reservas.add(new Reserva(datos[0], userR, LocalDate.parse(datos[3]), espacio, EstadoReserva.valueOf(datos[6]), datos[7]));
         }   
     }
 
@@ -211,7 +210,7 @@ public class Sistema {
                         break;
 
                     case 2:
-                        // user.consultarReserva();
+                        user.consultarReserva(reservas);
                         break;
 
                     case 3:

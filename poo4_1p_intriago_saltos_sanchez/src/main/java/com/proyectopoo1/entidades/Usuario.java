@@ -41,6 +41,12 @@ public abstract class Usuario {
     //metodos adicionales
     public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
 
+    public abstract void consultarReserva(ArrayList<Reserva> reservas);
+
+    public void enviarCorreo(){};
+
+    public void enviarCorreo(String materia){}
+
     public Boolean verificarFecha(ArrayList<Reserva> r, LocalDate fecha){
         for(Reserva reserva: r){
             if(reserva.getUser()==this && reserva.getFechaReserva().equals(fecha)){
