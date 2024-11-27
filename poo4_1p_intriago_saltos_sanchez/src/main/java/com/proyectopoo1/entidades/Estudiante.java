@@ -3,23 +3,14 @@ package com.proyectopoo1.entidades;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.Scanner;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import com.proyectopoo1.Sistema;
 import com.proyectopoo1.enums.DisponibilidadEsp;
 import com.proyectopoo1.enums.EstadoReserva;
 import com.proyectopoo1.enums.TipoEspacio;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class Estudiante extends Usuario{
 
@@ -54,47 +45,6 @@ public class Estudiante extends Usuario{
     public void setCarrera(String carrera) {
         this.carrera = carrera;
     }
-
-    //enviar correo sobrescrito para estudiante
-    //falta configurar el mensaje
-    @Override
-    public void enviarCorreo(String materia){
-
-        //obtener el administrador al que solicitamos la reserva
-
-        Dotenv dot = Dotenv.load();
-
-        String host = dot.get("MAIL_HOST");
-        String port = dot.get("MAIL_PORT");
-        String user = dot.get("MAIL_USER");
-        String pass = dot.get("MAIL_PASS");
-
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host",host);
-        prop.put("mail.smtp.port",port);
-        prop.put("mail.smtp.auth",true);
-        prop.put("mail.smtp.starttls.enable",true);
-
-  
-        Session sesion = Session.getInstance(prop, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication(user, pass);
-            }
-        });
-
-        try {
-            Message message = new MimeMessage(sesion);
-            message.setFrom(new InternetAddress(user,"APP DE RESERVAS"));
-            //el atributo de la clase que va a enviar el correo debe recibir correo
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("kelvintr@espol.edu.ec"));
-            message.setSubject("Reserva realizada");
-            message.setText("El estudiante " + this.nombres + " " + this.apellidos + "");
-            Transport.send(message);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 
     @Override
     //gestionarReserva() para estudiante
@@ -167,7 +117,8 @@ public class Estudiante extends Usuario{
 
            if(espaciosDis.isEmpty()){
             System.out.println("No hay espacios para esa fecha :(");
-           }else{
+           }
+           else{
 
                 for(int i=0; i<espaciosDis.size();i++){
                     System.out.println((i+1)+". " + espaciosDis.get(i).toString());
@@ -202,6 +153,8 @@ public class Estudiante extends Usuario{
                 if(option==1){
                     Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
                     reserva.cargarReserva();
+                    //despues de generar la reserva se le debe notificar al administrador
+                    enviarCorreo(reserva);
                 }
                 else{
                     Sistema.main(null);
