@@ -1,4 +1,8 @@
-package com.proyectopoo1;
+package com.proyectopoo1.entidades;
+
+import com.proyectopoo1.enums.DisponibilidadEsp;
+import com.proyectopoo1.enums.TipoEspacio;
+import com.proyectopoo1.enums.UsuarioPermitido;
 
 public class Espacio {
 

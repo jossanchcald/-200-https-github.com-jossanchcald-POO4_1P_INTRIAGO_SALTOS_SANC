@@ -1,4 +1,4 @@
-package com.proyectopoo1;
+package com.proyectopoo1.utilidades;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,7 +1,9 @@
-package com.proyectopoo1;
+package com.proyectopoo1.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.proyectopoo1.enums.EstadoReserva;
 
 
 public abstract class Usuario {

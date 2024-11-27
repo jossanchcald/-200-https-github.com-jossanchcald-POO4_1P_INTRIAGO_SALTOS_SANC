@@ -1,7 +1,5 @@
-package com.proyectopoo1;
+package com.proyectopoo1.entidades;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
@@ -13,6 +11,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.proyectopoo1.enums.EstadoReserva;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -94,7 +94,7 @@ public class Administrador extends Usuario{
 
         // Valida y retorna el codigo ingresado que pertenece a alguna reserva pendiente hecha
         while (!codValido) {
-            System.out.println("Ingresa el código de la reserva: ");
+            System.out.print("\nIngresa el código de la reserva: ");
             input = sc.nextLine();
 
             for (Reserva reserv : reservas) {
@@ -105,11 +105,12 @@ public class Administrador extends Usuario{
             }
 
             if(!codValido){
-                System.out.println("No existe una reserva con ese código. Intente nuevamente\n");
+                System.out.println("No existe una reserva pendiente con ese código. Intente nuevamente\n");
             }
         }
 
         System.out.println("\nCod. | Fecha Res. | Tipo Esp. | Nombre esp.  |  Capacidad esp.  | Nombres | Apellidos");
+        System.out.println("-".repeat(100));
         System.out.println(reservaSol.getCodUnico() + " | " + reservaSol.getFechaReserva() + " | " + reservaSol.getEspacio().getTipoEspacio() + " | " + reservaSol.getEspacio().getNombreEsp() + " | " + reservaSol.getEspacio().getCapacidadEsp() + " | " + reservaSol.getUser().getNombres() + " | " + reservaSol.getUser().getApellidos());
 
         System.out.println("\nOpciones:");
@@ -129,13 +130,15 @@ public class Administrador extends Usuario{
             case 1:
                 this.enviarCorreo(reservaSol.getUser().getCorreo(), reservaSol.getCodUnico(), null, EstadoReserva.APROBADO);
                 reservaSol.setEstadoReserva(EstadoReserva.APROBADO);
+                System.out.println("\nSolicitud de reserva APROBADA correctamente.");
                 break;
         
             case 2:
-                System.out.println("Indique el motivo del rechazo: ");
+                System.out.print("Indique el motivo del rechazo: ");
                 String motivo = sc.nextLine();
                 this.enviarCorreo(reservaSol.getUser().getCorreo(), reservaSol.getCodUnico(), motivo, EstadoReserva.RECHAZADO);
                 reservaSol.setEstadoReserva(EstadoReserva.RECHAZADO);
+                System.out.println("\nSolicitud de reserva RECHAZADA correctamente.");
                 break;
 
         }

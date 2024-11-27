@@ -1,10 +1,21 @@
 package com.proyectopoo1;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import com.proyectopoo1.entidades.Administrador;
+import com.proyectopoo1.entidades.Espacio;
+import com.proyectopoo1.entidades.Estudiante;
+import com.proyectopoo1.entidades.Profesor;
+import com.proyectopoo1.entidades.Reserva;
+import com.proyectopoo1.entidades.Usuario;
+import com.proyectopoo1.enums.DisponibilidadEsp;
+import com.proyectopoo1.enums.EstadoReserva;
+import com.proyectopoo1.enums.TipoEspacio;
+import com.proyectopoo1.enums.UsuarioPermitido;
+import com.proyectopoo1.utilidades.ManejoArchivo;
 
 
 public class Sistema {
@@ -149,8 +160,7 @@ public class Sistema {
             cargarReserva();
 
             if(user instanceof Estudiante || user instanceof Profesor){
-                System.out.println("\n\n");
-                System.out.println("Bienvenido/a " + user.nombres + ". ¿Qué deseas hacer el día de hoy?\n");
+                System.out.println("\nBienvenido/a " + user.getNombres() + ". ¿Qué deseas hacer el día de hoy?\n");
                 System.out.println("1. Reservar");
                 System.out.println("2. Consultar reserva");
                 System.out.println("3. Cerrar sesión");
@@ -181,8 +191,7 @@ public class Sistema {
                 }
                
             }else if (user instanceof Administrador){
-                System.out.println("\n\n");
-                System.out.println("Bienvenido/a " + user.nombres + ". ¿Qué deseas hacer el día de hoy?\n");
+                System.out.println("\nBienvenido/a " + user.getNombres() + ". ¿Qué deseas hacer el día de hoy?\n");
                 System.out.println("1. Gestionar Reserva");
                 System.out.println("2. Consultar reserva");
                 System.out.println("3. Cerrar sesión");
