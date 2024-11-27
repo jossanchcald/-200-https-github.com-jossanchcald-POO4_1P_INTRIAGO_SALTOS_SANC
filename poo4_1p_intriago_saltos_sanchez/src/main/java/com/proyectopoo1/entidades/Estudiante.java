@@ -164,4 +164,33 @@ public class Estudiante extends Usuario{
         scanner.close();
     }
 
+    @Override
+    public void consultarReserva(ArrayList<Reserva> reservas) {
+        Scanner sc = new Scanner(System.in);
+        LocalDate fecha = null;
+        boolean fechaValida = false;
+        String fechaIng;
+
+        //valida si la fecha ingresada es valida en el formato yyyy-MM-dd
+        while (!fechaValida) {
+            System.out.print("\nIngrese la fecha de la reserva a consultar (Año-Mes-Dia): ");
+            fechaIng = sc.nextLine();
+
+            try {
+                fecha = LocalDate.parse(fechaIng);
+                fechaValida = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha inválido. Por favor, intenta de nuevo.");
+            }
+        }
+
+        for (Reserva reserv : reservas) {
+            if (reserv.getFechaReserva().equals(fecha)) {
+                System.out.println("\nDatos reserva: \n");
+                System.out.println(reserv.getCodUnico() + " - " + fecha + " - " + reserv.getEspacio().getTipoEspacio() + " - " + reserv.getEspacio().getNombreEsp() + " - " + 
+                reserv.getEspacio().getCapacidadEsp() + " - " + reserv.getUser().getNombres() + " " + reserv.getUser().getApellidos() + " - " + reserv.getEstadoReserva());
+            }
+        }
+        sc.close();
+    }
 }

@@ -179,7 +179,7 @@ public class Sistema {
                         break;
 
                     case 2:
-                        // user.consultarReserva();
+                        user.consultarReserva(reservas);
                         break;
 
                     case 3:
