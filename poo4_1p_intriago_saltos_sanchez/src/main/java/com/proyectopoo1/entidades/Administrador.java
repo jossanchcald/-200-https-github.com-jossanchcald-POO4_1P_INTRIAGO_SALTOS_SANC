@@ -3,6 +3,7 @@ package com.proyectopoo1.entidades;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -84,23 +85,27 @@ public class Administrador extends Usuario{
             System.out.println(e.getMessage());
         }
     }
-
+    
     @Override
     public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas) {
         Scanner sc = new Scanner(System.in);
         boolean codValido = false;
         String input;
         Reserva reservaSol = null;
+        int index = 0;
 
         // Valida y retorna el codigo ingresado que pertenece a alguna reserva pendiente hecha
         while (!codValido) {
             System.out.print("\nIngresa el código de la reserva: ");
             input = sc.nextLine();
+        
 
             for (Reserva reserv : reservas) {
                 if(reserv.getCodUnico().equals(input) && reserv.getEstadoReserva().equals(EstadoReserva.PENDIENTE)){
                     codValido = true;
                     reservaSol = reserv;
+                    index = reservas.indexOf(reserv);
+                   
                 }
             }
 
@@ -116,14 +121,14 @@ public class Administrador extends Usuario{
         System.out.println("\nOpciones:");
         System.out.println("1. Aprobar");
         System.out.println("2. Rechazar");
-        System.out.print("\nIngrese la opcion a realizar (1,2): ");
-        int decs = sc.nextInt();
-        sc.nextLine();
+        System.out.print("Ingrese la opcion a realizar (1,2): ");
+        String de = sc.nextLine();  
+        int decs = Integer.parseInt(de);  
         
         while (decs < 1 || decs > 2) {
             System.out.print("\nOpción invalida. Ingresa una opción válida: ");
-            decs = sc.nextInt();
-            sc.nextLine();
+            de = sc.nextLine();  
+            decs = Integer.parseInt(de);  
         }
 
         switch (decs) {
@@ -131,6 +136,7 @@ public class Administrador extends Usuario{
                 this.enviarCorreo(reservaSol.getUser().getCorreo(), reservaSol.getCodUnico(), null, EstadoReserva.APROBADO);
                 reservaSol.setEstadoReserva(EstadoReserva.APROBADO);
                 reservaSol.getEspacio().setEstadoEsp(DisponibilidadEsp.RESERVADO);
+                reservas.set(index, reservaSol);
                 System.out.println("\nSolicitud de reserva APROBADA correctamente.");
                 break;
         
@@ -139,12 +145,14 @@ public class Administrador extends Usuario{
                 String motivo = sc.nextLine();
                 this.enviarCorreo(reservaSol.getUser().getCorreo(), reservaSol.getCodUnico(), motivo, EstadoReserva.RECHAZADO);
                 reservaSol.setEstadoReserva(EstadoReserva.RECHAZADO);
+                reservaSol.setMotivoReserva(motivo);
+                reservas.set(index, reservaSol);
                 System.out.println("\nSolicitud de reserva RECHAZADA correctamente.");
                 break;
 
         }
-        sc.close();
     }
+        
 
     @Override
     public void consultarReserva(ArrayList<Reserva> reservas){

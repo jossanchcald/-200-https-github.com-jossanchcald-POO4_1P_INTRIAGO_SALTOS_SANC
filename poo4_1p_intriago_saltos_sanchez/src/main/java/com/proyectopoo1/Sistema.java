@@ -58,6 +58,7 @@ public class Sistema {
                         Sistema.usuarios.add(new Estudiante(info[4], info[5],datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]));
                     }             
                 }
+                break;
 
                 case "P":
                 for(String line: ManejoArchivo.leerArchivo("profesores.txt")){
@@ -67,6 +68,7 @@ public class Sistema {
                         Sistema.usuarios.add(new Profesor(info[4],materias ,datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]));
                     }
                 }
+                break;
 
                 case "A":
                 for(String line: ManejoArchivo.leerArchivo("administradores.txt")){
@@ -75,9 +77,9 @@ public class Sistema {
                         Sistema.usuarios.add(new Administrador(info[4],datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]));
                     }
                 }
-                default:
-                    break;
+                break;
             }
+
         }
 
     }
@@ -120,8 +122,7 @@ public class Sistema {
 
         Scanner sc = new Scanner(System.in);
         cargarUsuario();
-
-       
+  
         // PROGRAMA PRINCIPAL
         System.out.println(
                         "██████╗░███████╗░██████╗███████╗██████╗░██╗░░░██╗███████╗██████╗░░█████╗░██╗░░░░░\r\n" + 
@@ -194,7 +195,7 @@ public class Sistema {
                 System.out.println("1. Gestionar Reserva");
                 System.out.println("2. Consultar reserva");
                 System.out.println("3. Cerrar sesión");
-                System.out.print("\nIngresa el numero de la opcion a la que deseas ingresar: ");
+                System.out.print("Ingresa el numero de la opcion a la que deseas ingresar: ");
                 int opc = sc.nextInt();
                 sc.nextLine();
 
@@ -207,6 +208,7 @@ public class Sistema {
                 switch (opc) {
                     case 1:
                         user.gestionarReserva(espacios, reservas);
+                        Reserva.cargarReservas(reservas);
                         break;
 
                     case 2:

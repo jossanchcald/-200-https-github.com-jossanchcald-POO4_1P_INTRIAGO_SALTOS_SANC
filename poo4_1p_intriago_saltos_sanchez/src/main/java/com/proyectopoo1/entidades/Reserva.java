@@ -48,6 +48,16 @@ public class Reserva {
         ManejoArchivo.escribirArchivo("reservas.txt", datosAEscr);
     }
 
+    public static void cargarReservas(ArrayList<Reserva> reservas){
+        ArrayList<String> nuevas = new ArrayList<>();
+        for(Reserva r: reservas){
+            nuevas.add(r.toString());
+        }
+        ManejoArchivo.escribirArchivo("reservas.txt", nuevas);
+
+    }
+
+
     private String generarCodUnico(){
         ArrayList<String> lista = ManejoArchivo.leerArchivo("reservas.txt");
         String[] datos = lista.get(lista.size()-1).split(" \\| ");
