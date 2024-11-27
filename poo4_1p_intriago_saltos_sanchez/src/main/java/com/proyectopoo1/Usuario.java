@@ -44,6 +44,8 @@ public abstract class Usuario {
 
     public void enviarCorreo(String materia){}
 
+    public void enviarCorreo(String correoPE, String codReserva, String motivo, EstadoReserva decision){}
+
     //getters
     public String getCodUnico(){
         return codUnico;

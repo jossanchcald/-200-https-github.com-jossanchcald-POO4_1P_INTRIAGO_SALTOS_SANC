@@ -8,7 +8,7 @@ public class Reserva {
     // Variables de instancia
     private String codUnico;
     private Usuario user; 
-    private LocalDate fechaReserva; // Se recomienda el uso de LocalDate de java.time, ya que Date es obsoleto
+    private LocalDate fechaReserva;
     private Espacio espacio; 
     private EstadoReserva estadoReserva;
     private String motivoReserva;
