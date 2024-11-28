@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import com.proyectopoo1.entidades.Administrador;
 import com.proyectopoo1.entidades.Espacio;
 import com.proyectopoo1.entidades.Estudiante;
@@ -139,6 +140,7 @@ public class Sistema {
             reservas.add(new Reserva(datos[0], userR, LocalDate.parse(datos[3]), espacio,
                     EstadoReserva.valueOf(datos[6]), datos[7]));
         }
+        // Usado para cambiar el valor del contador de las reservas con aquellas que ya fueron creadas
         Reserva.contador = reservas.size();
     }
 

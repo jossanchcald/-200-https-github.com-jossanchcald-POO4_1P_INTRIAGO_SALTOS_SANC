@@ -3,6 +3,7 @@ package com.proyectopoo1.entidades;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import com.proyectopoo1.Sistema;
 import com.proyectopoo1.enums.DisponibilidadEsp;
 import com.proyectopoo1.enums.EstadoReserva;
@@ -67,10 +68,10 @@ public class Estudiante extends Usuario {
     public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas, Scanner sc) {
         LocalDate fecha = validarFecha(sc);
 
+        // valida que solo pueda crear una reserva para un mismo día 
         boolean valida = verificarFecha(reservas, fecha);
         if (valida == false) {
             System.out.println("\nYa tiene una reserva para la fecha " + fecha);
-
         } else {
 
             // mostrar las canchas o aulas disponibles
@@ -78,6 +79,7 @@ public class Estudiante extends Usuario {
             System.out.println("2. CANCHA");
             int op = elegirOpcion(1, 2, sc);
 
+            // selecciona solo los espacios disponibles para el estudiante del archivo espacio.txt
             ArrayList<Espacio> espaciosDis = new ArrayList<>();
             if (op == 1) {
                 for (Espacio espacio : espacios) {
@@ -96,6 +98,8 @@ public class Estudiante extends Usuario {
                 }
             }
 
+            // elemina aquellos espacios que esten disponibles en el archivo de espacios, 
+            // pero que tengan una reserva en la fecha ingresada
             ArrayList<Espacio> espaciosParaEliminar = new ArrayList<>();
             for (Espacio espacio : espaciosDis) {
                 for (Reserva r : reservas) {
@@ -108,6 +112,7 @@ public class Estudiante extends Usuario {
 
             espaciosDis.removeAll(espaciosParaEliminar);
 
+            // muestra aquellos espacios que esten disponibles y que no tengan reservas agendadas para la fecha ingresada
             if (espaciosDis.isEmpty()) {
                 System.out.println("\nNo hay espacios para esa fecha :(");
             } else {
@@ -118,6 +123,7 @@ public class Estudiante extends Usuario {
                 }
 
                 int ops = elegirOpcion(1, espaciosDis.size(), sc);
+                // guarda el espacio seleccionado en una variable
                 Espacio esp = espaciosDis.get(ops - 1);
 
                 System.out.println("¡BIEN!");
@@ -130,11 +136,13 @@ public class Estudiante extends Usuario {
                 int option = elegirOpcion(1, 2, sc);
 
                 if (option == 1) {
+                    // crea una nueva reserva y la carga al archivo reserva.txt
                     Reserva reserva = new Reserva(this, fecha, esp, EstadoReserva.PENDIENTE, motivo);
                     reserva.cargarReserva();
                     // despues de generar la reserva se le debe notificar al administrador
                     enviarCorreo(reserva);
                 } else {
+                    // regresa al menu si selecciona NO
                     Sistema.main(null);
                 }
             }

@@ -2,6 +2,7 @@ package com.proyectopoo1.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import com.proyectopoo1.enums.EstadoReserva;
 import com.proyectopoo1.utilidades.ManejoArchivo;
 
@@ -25,6 +26,7 @@ public class Reserva {
 
     /**
      * Constructor que inicializa a reserva con un Cod. Unico generado
+     * Utilizado para cargar las nuevas reservas que se crean
      * @param user
      * @param fechaReserva
      * @param espacio
@@ -45,6 +47,7 @@ public class Reserva {
 
     /**
      * Constructor que inicializa a reserva con todos sus atributos especificados
+     * Utilizado para cargar las reservas del txt que ya tiene un codUnico definido
      * @param codUnico
      * @param user
      * @param fechaReserva
@@ -67,6 +70,7 @@ public class Reserva {
      */
     public void cargarReserva() {
         ArrayList<String> datosAEscr = ManejoArchivo.leerArchivo("reservas.txt");
+        // El objeto que llama al metodo es escrito en el txt de reserva
         datosAEscr.add(this.toString());
         ManejoArchivo.escribirArchivo("reservas.txt", datosAEscr);
     }
@@ -76,6 +80,8 @@ public class Reserva {
      * @param reservas Lista de reservas necesaria para sobreescribir/reescribir reservas.txt
      */
     public static void cargarReservas(ArrayList<Reserva> reservas) {
+        // Recibe el arraylist con las reservas ya cambiadas de estado RECHAZADO O APROBADO
+        // y lo convierte a un arraylist de String para reescribir el txt en orden
         ArrayList<String> nuevas = new ArrayList<>();
         for (Reserva r : reservas) {
             nuevas.add(r.toString());
