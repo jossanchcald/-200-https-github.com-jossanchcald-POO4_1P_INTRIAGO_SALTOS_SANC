@@ -2,24 +2,37 @@ package com.proyectopoo1.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import com.proyectopoo1.enums.EstadoReserva;
 import com.proyectopoo1.utilidades.ManejoArchivo;
 
+/**
+ * Representa una reserva realizada en el sistema. Contiene información como el usuario que realiza la reserva, 
+ * la fecha de la misma, el espacio reservado, el estado de la reserva y el motivo asociado. 
+ * También incluye funcionalidades para la persistencia de datos en archivos y la generación de códigos únicos 
+ * para identificar cada reserva.
+ * 
+ */
 public class Reserva {
 
     // Variables de instancia
     private String codUnico;
-    private Usuario user; 
+    private Usuario user;
     private LocalDate fechaReserva;
-    private Espacio espacio; 
+    private Espacio espacio;
     private EstadoReserva estadoReserva;
     private String motivoReserva;
     public static int contador;
 
-
-    // Constructores
-    public Reserva(Usuario user, LocalDate fechaReserva, Espacio espacio, EstadoReserva estadoReserva, String motivoReserva){
+    /**
+     * Constructor que inicializa a reserva con un Cod. Unico generado
+     * @param user
+     * @param fechaReserva
+     * @param espacio
+     * @param estadoReserva
+     * @param motivoReserva
+     */
+    public Reserva(Usuario user, LocalDate fechaReserva, Espacio espacio, EstadoReserva estadoReserva,
+            String motivoReserva) {
         this.codUnico = generarCodUnico();
         this.user = user;
         this.fechaReserva = fechaReserva;
@@ -28,8 +41,19 @@ public class Reserva {
         this.motivoReserva = motivoReserva;
         contador++;
 
-    } 
-    public Reserva(String codUnico, Usuario user, LocalDate fechaReserva, Espacio espacio, EstadoReserva estadoReserva, String motivoReserva){
+    }
+
+    /**
+     * Constructor que inicializa a reserva con todos sus atributos especificados
+     * @param codUnico
+     * @param user
+     * @param fechaReserva
+     * @param espacio
+     * @param estadoReserva
+     * @param motivoReserva
+     */
+    public Reserva(String codUnico, Usuario user, LocalDate fechaReserva, Espacio espacio, EstadoReserva estadoReserva,
+            String motivoReserva) {
         this.codUnico = codUnico;
         this.user = user;
         this.fechaReserva = fechaReserva;
@@ -38,37 +62,47 @@ public class Reserva {
         this.motivoReserva = motivoReserva;
     }
 
-    // Métodos adicionales
-    public void cargarReserva(){
-        
+    /**
+     * Metodo que añade un objeto reserva a reservas.txt
+     */
+    public void cargarReserva() {
         ArrayList<String> datosAEscr = ManejoArchivo.leerArchivo("reservas.txt");
         datosAEscr.add(this.toString());
         ManejoArchivo.escribirArchivo("reservas.txt", datosAEscr);
     }
 
-    public static void cargarReservas(ArrayList<Reserva> reservas){
+    /**
+     * Metodo que reescribe reservas.txt con las reservas cambiadas
+     * @param reservas Lista de reservas necesaria para sobreescribir/reescribir reservas.txt
+     */
+    public static void cargarReservas(ArrayList<Reserva> reservas) {
         ArrayList<String> nuevas = new ArrayList<>();
-        for(Reserva r: reservas){
+        for (Reserva r : reservas) {
             nuevas.add(r.toString());
         }
         ManejoArchivo.escribirArchivo("reservas.txt", nuevas);
 
     }
 
-
-    private String generarCodUnico(){
+    /**
+     * Metodo que genera un Cod. Unico para la reserva de manera creciente tomando como base el
+     * ultimo Cod. Unico
+     * @return String Devuelve el numero del codigo creado
+     */
+    private String generarCodUnico() {
         ArrayList<String> lista = ManejoArchivo.leerArchivo("reservas.txt");
-        String[] datos = lista.get(lista.size()-1).split(" \\| ");
+        String[] datos = lista.get(lista.size() - 1).split(" \\| ");
 
         int ultimoCodUnico = Integer.parseInt(datos[0]);
-        return "" + (ultimoCodUnico+1);
+        return "" + (ultimoCodUnico + 1);
     }
 
     @Override
-    public String toString(){
-        return codUnico + " | " + user.codUnico + " | " + user.getNumCedula() + " | " + fechaReserva + " | " + espacio.getCodUnico() + " | " + espacio.getTipoEspacio() + " | " + estadoReserva + " | " + motivoReserva;
+    public String toString() {
+        return codUnico + " | " + user.codUnico + " | " + user.getNumCedula() + " | " + fechaReserva + " | "
+                + espacio.getCodUnico() + " | " + espacio.getTipoEspacio() + " | " + estadoReserva + " | "
+                + motivoReserva;
     }
-
 
     // Getters
     public String getCodUnico() {
@@ -83,25 +117,24 @@ public class Reserva {
         return espacio;
     }
 
-    public LocalDate getFechaReserva(){
+    public LocalDate getFechaReserva() {
         return fechaReserva;
     }
 
     public EstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
-    
+
     public String getMotivoReserva() {
         return motivoReserva;
     }
-    
+
     public static int getContador() {
         return contador;
     }
-    
-    
+
     // Setters
-    public void setCodUnico(String codUnico){
+    public void setCodUnico(String codUnico) {
         this.codUnico = codUnico;
     }
 
@@ -128,6 +161,5 @@ public class Reserva {
     public static void setContador(int contador) {
         Reserva.contador = contador;
     }
-
 
 }

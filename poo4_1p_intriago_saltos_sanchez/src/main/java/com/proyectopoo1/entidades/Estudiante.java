@@ -3,27 +3,41 @@ package com.proyectopoo1.entidades;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.proyectopoo1.Sistema;
 import com.proyectopoo1.enums.DisponibilidadEsp;
 import com.proyectopoo1.enums.EstadoReserva;
 import com.proyectopoo1.enums.TipoEspacio;
 
-
-public class Estudiante extends Usuario{
+/**
+ * Representa a un estudiante dentro del sistema de reservas. Permite gestionar las reservas de espacios, 
+ * consultarlas y realizar solicitudes de reserva con estado pendiente hasta su aprobación por parte de un administrador. 
+ * Los estudiantes pueden seleccionar espacios según disponibilidad y especificar el motivo de la reserva.
+ * 
+ */
+public class Estudiante extends Usuario {
 
     // Variables de instancia
     private String numMatricula;
     private String carrera;
 
-
-    // Constructores
-    public Estudiante(String numMatricula, String carrera, String codUnico, String numCedula, String nombres, String apellidos, String user, String password, String correo){
+    /**
+     * Constructor que inicializa a profesor con todos sus atributos especificados
+     * @param numMatricula
+     * @param carrera
+     * @param codUnico código único que identifica al estudiante
+     * @param numCedula
+     * @param nombres
+     * @param apellidos
+     * @param user
+     * @param password
+     * @param correo
+     */
+    public Estudiante(String numMatricula, String carrera, String codUnico, String numCedula, String nombres,
+            String apellidos, String user, String password, String correo) {
         super(codUnico, numCedula, nombres, apellidos, user, password, correo);
         this.numMatricula = numMatricula;
         this.carrera = carrera;
     }
-
 
     // Getters
     public String getNumMatricula() {
@@ -33,7 +47,6 @@ public class Estudiante extends Usuario{
     public String getCarrera() {
         return carrera;
     }
-
 
     // Setters
     public void setNumMatricula(String numMatricula) {
@@ -45,34 +58,39 @@ public class Estudiante extends Usuario{
     }
 
     @Override
-    //gestionarReserva() para estudiante
-    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
-
-        Scanner scanner = new Scanner(System.in);
-        LocalDate fecha = validarFecha();
+    /**
+     * Metodo que realiza una reserva con estado pendiente hasta la decision de un administrador
+     * @param espacios Lista de espacios necesaria para mostrar cuales son los que estan disponibles
+     * @param reservas Lista de reservas necesaria para adjuntar la nueva reserva a esta lista
+     * @param sc Scanner para ingresar datos e informacion via teclado
+     */
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas, Scanner sc) {
+        LocalDate fecha = validarFecha(sc);
 
         boolean valida = verificarFecha(reservas, fecha);
-        if(valida==false){
-            System.out.println("Ya tiene una reserva para la fecha" + fecha);
+        if (valida == false) {
+            System.out.println("\nYa tiene una reserva para la fecha " + fecha);
 
-        }else{
-            
-            //mostrar las canchas o aulas disponibles
-            System.out.println("1. AULA");
+        } else {
+
+            // mostrar las canchas o aulas disponibles
+            System.out.println("\n1. AULA");
             System.out.println("2. CANCHA");
-            int op = elegirOpcion(1, 2);
+            int op = elegirOpcion(1, 2, sc);
 
             ArrayList<Espacio> espaciosDis = new ArrayList<>();
-            if(op==1){
-                for(Espacio espacio : espacios){
-                    if(espacio.getTipoEspacio() == TipoEspacio.AULA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
+            if (op == 1) {
+                for (Espacio espacio : espacios) {
+                    if (espacio.getTipoEspacio() == TipoEspacio.AULA
+                            && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE) {
                         espaciosDis.add(espacio);
                     }
                 }
 
-            } else if(op==2){
-                for(Espacio espacio : espacios){
-                    if(espacio.getTipoEspacio() == TipoEspacio.CANCHA && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE){
+            } else if (op == 2) {
+                for (Espacio espacio : espacios) {
+                    if (espacio.getTipoEspacio() == TipoEspacio.CANCHA
+                            && espacio.getEstadoEsp() == DisponibilidadEsp.DISPONIBLE) {
                         espaciosDis.add(espacio);
                     }
                 }
@@ -83,59 +101,77 @@ public class Estudiante extends Usuario{
                 for (Reserva r : reservas) {
                     if (r.getFechaReserva().equals(fecha) && r.getEspacio() == espacio) {
                         espaciosParaEliminar.add(espacio);
-                        break; 
+                        break;
                     }
                 }
             }
-            
+
             espaciosDis.removeAll(espaciosParaEliminar);
 
-           if(espaciosDis.isEmpty()){
-            System.out.println("No hay espacios para esa fecha :(");
-           }
-           else{
+            if (espaciosDis.isEmpty()) {
+                System.out.println("\nNo hay espacios para esa fecha :(");
+            } else {
 
-                for(int i=0; i<espaciosDis.size();i++){
-                    System.out.println((i+1)+". " + espaciosDis.get(i).toString());
+                System.out.println("");
+                for (int i = 0; i < espaciosDis.size(); i++) {
+                    System.out.println((i + 1) + ". " + espaciosDis.get(i).toString());
                 }
 
-                int ops = elegirOpcion(1, espaciosDis.size());
-                Espacio esp = espaciosDis.get(ops-1);
+                int ops = elegirOpcion(1, espaciosDis.size(), sc);
+                Espacio esp = espaciosDis.get(ops - 1);
 
-                System.out.println("BIEN!");
-                System.out.print("Ahora ingresa el motivo de tu reserva: ");
-                String motivo = scanner.nextLine();
+                System.out.println("¡BIEN!");
+                System.out.print("\nAhora ingresa el motivo de tu reserva: ");
+                String motivo = sc.nextLine();
 
-                System.out.println("¿Desea crear la reserva: ");
-                System.out.println("1. SI");
+                System.out.println("\n¿Desea crear la reserva?: ");
+                System.out.println("\n1. SI");
                 System.out.println("2. NO");
-                int option = elegirOpcion(1, 2);
-       
+                int option = elegirOpcion(1, 2, sc);
 
-                if(option==1){
-                    Reserva reserva = new Reserva(this,fecha,esp,EstadoReserva.PENDIENTE,motivo);
+                if (option == 1) {
+                    Reserva reserva = new Reserva(this, fecha, esp, EstadoReserva.PENDIENTE, motivo);
                     reserva.cargarReserva();
-                    //despues de generar la reserva se le debe notificar al administrador
+                    // despues de generar la reserva se le debe notificar al administrador
                     enviarCorreo(reserva);
-                }
-                else{
+                } else {
                     Sistema.main(null);
                 }
-           }
+            }
         }
     }
 
     @Override
-    public void consultarReserva(ArrayList<Reserva> reservas) {
-        Scanner sc = new Scanner(System.in);
-        LocalDate fecha = validarFecha();
+    /**
+     * Metodo que consulta una reserva creada por el mismo usuario
+     * @param reservas Lista de reservas necesaria para poder recorrer y encontrar la deseada
+     * @param sc Scanner necesario para ingresar datos e informacion via teclado
+     */
+    public void consultarReserva(ArrayList<Reserva> reservas, Scanner sc) {
 
-        for (Reserva reserv : reservas) {
-            if (reserv.getFechaReserva().equals(fecha) && reserv.getUser() == this) {
-                System.out.println("\nDatos reserva: \n");
-                System.out.println(reserv.getCodUnico() + " - " + fecha + " - " + reserv.getEspacio().getTipoEspacio() + " - " + reserv.getEspacio().getNombreEsp() + " - " + 
-                reserv.getEspacio().getCapacidadEsp() + " - " + reserv.getUser().getNombres() + " " + reserv.getUser().getApellidos() + " - " + reserv.getEstadoReserva());
+        boolean fechaReservaDeUser = false;
+        Reserva reservaUser = null;
+        do {
+            LocalDate fecha = validarFecha(sc);
+
+            for (Reserva reserv : reservas) {
+                if (reserv.getFechaReserva().equals(fecha) && reserv.getUser() == this) {
+                    reservaUser = reserv;
+                    fechaReservaDeUser = true;
+                    break;
+                }
             }
-        }
+            if (!fechaReservaDeUser) {
+                System.out.println("\nDicha fecha no pertenece a ninguna reserva realizada por usted.");
+                System.out.println("Intente nuevamente.");
+            } else {
+                System.out.println("\nDatos reserva: \n");
+                System.out.println(
+                        reservaUser.getCodUnico() + " - " + fecha + " - " + reservaUser.getEspacio().getTipoEspacio()
+                                + " - " + reservaUser.getEspacio().getNombreEsp() + " - " +
+                                reservaUser.getEspacio().getCapacidadEsp() + " - " + reservaUser.getUser().getNombres()
+                                + " " + reservaUser.getUser().getApellidos() + " - " + reservaUser.getEstadoReserva());
+            }
+        } while (!fechaReservaDeUser);
     }
 }

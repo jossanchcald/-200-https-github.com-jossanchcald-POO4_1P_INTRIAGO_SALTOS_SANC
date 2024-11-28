@@ -4,16 +4,31 @@ import com.proyectopoo1.enums.DisponibilidadEsp;
 import com.proyectopoo1.enums.TipoEspacio;
 import com.proyectopoo1.enums.UsuarioPermitido;
 
+/**
+ * Esta clase representa los espacios disponibles para ser reservados en un sistema. 
+ * Contiene atributos como el tipo de espacio, la capacidad máxima, el estado de disponibilidad 
+ * y los permisos asociados para diferentes tipos de usuarios.
+ * 
+ */
 public class Espacio {
 
-    private String codUnico;
+    // Variables de instancia
+    private String codUnico; 
     private TipoEspacio tipoEspacio;
     private String nombreEsp;
     private int capacidadEsp;
     private DisponibilidadEsp estadoEsp;
     private UsuarioPermitido permiso;
 
-    // constructor
+    /**
+     * Constructor que inicializa a reserva con todos sus atributos especificados
+     * @param codUnico código único que identifica al espacio
+     * @param tipoEspacio
+     * @param nombreEsp
+     * @param capacidadEsp capacidad maxima de personas de cada espacio
+     * @param estadoEsp estado actual del espacio, puede estar disponible o reservado
+     * @param permiso usuarios permitidos a reservar el espacio
+     */
     public Espacio(String codUnico, TipoEspacio tipoEspacio,String nombreEsp ,int capacidadEsp ,DisponibilidadEsp estadoEsp ,UsuarioPermitido permiso){
         this.codUnico = codUnico;
         this.tipoEspacio = tipoEspacio;
@@ -24,9 +39,9 @@ public class Espacio {
 
     }
 
+    @Override
     public String toString(){
         return codUnico + " | " + tipoEspacio + " | " + nombreEsp + " | " + capacidadEsp + " | " + estadoEsp + " | " + permiso;
-
     }
 
     // getters 
