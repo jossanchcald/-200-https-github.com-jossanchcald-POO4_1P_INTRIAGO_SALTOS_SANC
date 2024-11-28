@@ -167,6 +167,7 @@ public class Sistema {
         String userIn;
         String passwordIn;
 
+        // Validacion de que las credenciales pertenecen a algún usuario
         do {
             System.out.print("Ingrese su usuario: ");
             userIn = sc.nextLine();
@@ -182,6 +183,7 @@ public class Sistema {
 
         Usuario user = iniciarSesion(userIn, passwordIn);
 
+        // Bucle principal, no se cierra hasta que el usuario decide cerrar sesion
         do {
             cargarEspacio();
             cargarReserva();
@@ -210,6 +212,7 @@ public class Sistema {
                 }
 
             } else if (user instanceof Administrador) {
+                System.out.println("\n"+"-".repeat(100));
                 System.out.println("\nBienvenido/a " + user.getNombres() + ". ¿Qué deseas hacer el día de hoy?\n");
                 System.out.println("1. Gestionar Reserva");
                 System.out.println("2. Consultar reserva");

@@ -96,10 +96,10 @@ public class Reserva {
      * @return String Devuelve el numero del codigo creado
      */
     private String generarCodUnico() {
-        ArrayList<String> lista = ManejoArchivo.leerArchivo("reservas.txt");
-        String[] datos = lista.get(lista.size() - 1).split(" \\| ");
+        ArrayList<String> lista = ManejoArchivo.leerArchivo("reservas.txt"); // Obtencion de los datos de reservas.txt
+        String[] datos = lista.get(lista.size() - 1).split(" \\| "); // Division de la ultima linea por "|"
 
-        int ultimoCodUnico = Integer.parseInt(datos[0]);
+        int ultimoCodUnico = Integer.parseInt(datos[0]); // Obtencion del ultimo codigo creado
         return "" + (ultimoCodUnico + 1);
     }
 

@@ -85,12 +85,12 @@ public class Administrador extends Usuario {
                 + reservaSol.getUser().getApellidos());
 
         System.out.println("\nOpciones:");
-        System.out.println("1. Aprobar");
+        System.out.println("\n1. Aprobar");
         System.out.println("2. Rechazar");
         int decs = elegirOpcion(1, 2, sc);
 
         switch (decs) {
-            case 1:
+            case 1: // Aprobar reserva
                 this.enviarCorreo(reservaSol, null, EstadoReserva.APROBADO);
                 reservaSol.setEstadoReserva(EstadoReserva.APROBADO);
                 reservaSol.getEspacio().setEstadoEsp(DisponibilidadEsp.RESERVADO);
@@ -99,7 +99,7 @@ public class Administrador extends Usuario {
                 System.out.println("\nSolicitud de reserva APROBADA correctamente.");
                 break;
 
-            case 2:
+            case 2: // Rechazar reserva
                 System.out.print("Indique el motivo del rechazo: ");
                 String motivo = sc.nextLine();
                 this.enviarCorreo(reservaSol, motivo, EstadoReserva.RECHAZADO);
@@ -122,14 +122,15 @@ public class Administrador extends Usuario {
      */
     public void consultarReserva(ArrayList<Reserva> reservas, Scanner sc) {
         System.out.println("\nNúmero de reservas creadas: " + Reserva.getContador() + "\n");
+
         for (Reserva reserv : reservas) {
-            if (reserv.getUser() instanceof Estudiante) {
+            if (reserv.getUser() instanceof Estudiante) { // Si el usuario de la reserva es Est. este formato
                 Estudiante estudiante = (Estudiante) reserv.getUser();
                 System.out.println(
                         reserv.getCodUnico() + " - " + reserv.getEstadoReserva() + " - " + reserv.getFechaReserva() +
                                 " - " + estudiante.getNombres() + " " + estudiante.getApellidos() + " - "
                                 + estudiante.getNumMatricula());
-            } else if (reserv.getUser() instanceof Profesor) {
+            } else if (reserv.getUser() instanceof Profesor) { // Si el usuario de la reserva es Prof. este formato
                 System.out.println(
                         reserv.getCodUnico() + " - " + reserv.getEstadoReserva() + " - " + reserv.getFechaReserva() +
                                 " - " + reserv.getUser().getNombres() + " " + reserv.getUser().getApellidos() + " - "
