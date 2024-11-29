@@ -1,0 +1,56 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'C:/Users/Josue/.m2/repository/com/sun/mail/javax.mail/1.6.2/javax.mail-1.6.2.jar;C:/Users/Josue/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar;C:/Users/Josue/.m2/repository/io/github/cdimascio/dotenv-java/3.0.0/dotenv-java-3.0.0.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/Josue/Desktop/ProyectoPOO/poo4_1p_intriago_saltos_sanchez/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Josue/Desktop/ProyectoPOO/poo4_1p_intriago_saltos_sanchez/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'poo4_1p_intriago_saltos_sanchez 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'poo4_1p_intriago_saltos_sanchez 1.0-SNAPSHOT API'
+com.proyectopoo1.entidades
+com.proyectopoo1.enums
+com.proyectopoo1
+com.proyectopoo1.utilidades
+C:\Users\Josue\.m2\repository\com\sun\mail\javax.mail\1.6.2\javax.mail-1.6.2.jar = 1732584144853
+C:\Users\Josue\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar = 1732584144898
+C:\Users\Josue\.m2\repository\io\github\cdimascio\dotenv-java\3.0.0\dotenv-java-3.0.0.jar = 1732584145020
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\src\main\java = 1731181590873
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\allclasses-index.html = 1732860677870
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\allpackages-index.html = 1732860677873
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\copy.svg = 1732860677918
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\element-list = 1732860677714
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\help-doc.html = 1732860677911
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\index-all.html = 1732860677902
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\index.html = 1732860677854
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\link.svg = 1732860677920
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\member-search-index.js = 1732860677880
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\module-search-index.js = 1732860677875
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\overview-summary.html = 1732860677907
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\overview-tree.html = 1732860677849
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\package-search-index.js = 1732860677877
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\script.js = 1732860677916
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\search-page.js = 1732860677926
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\search.html = 1732860677904
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\search.js = 1732860677924
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\stylesheet.css = 1732860677914
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\tag-search-index.js = 1732860677881
+C:\Users\Josue\Desktop\ProyectoPOO\poo4_1p_intriago_saltos_sanchez\target\reports\apidocs\type-search-index.js = 1732860677878

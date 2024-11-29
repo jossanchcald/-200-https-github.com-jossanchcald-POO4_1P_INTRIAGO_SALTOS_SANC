@@ -81,7 +81,7 @@ public abstract class Usuario {
      * @param fecha Fecha necesaria para verificar si hay alguna reserva creada en esa fecha
      * @return boolean Devuelve el valor booleano de la verificacion
      */
-    public Boolean verificarFecha(ArrayList<Reserva> r, LocalDate fecha) {
+    public boolean verificarFecha(ArrayList<Reserva> r, LocalDate fecha) {
         for (Reserva reserva : r) {
             if (reserva.getUser() == this && reserva.getFechaReserva().equals(fecha)) {
                 return false;

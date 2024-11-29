@@ -39,7 +39,7 @@ public class Administrador extends Usuario {
     }
 
     // Setters
-    public void serCargo(String cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
 
